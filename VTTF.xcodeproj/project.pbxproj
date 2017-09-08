@@ -13,6 +13,7 @@
 		CDF1A0231F62682A00DB605D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A0221F62682A00DB605D /* Assets.xcassets */; };
 		CDF1A0261F62682A00DB605D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A0241F62682A00DB605D /* LaunchScreen.storyboard */; };
 		CDF1A02F1F626F2A00DB605D /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF1A02E1F626F2A00DB605D /* CocoaAsyncSocket.framework */; };
+		CDF1A0321F62716E00DB605D /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A0311F62716E00DB605D /* SocketManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CDF1A0251F62682A00DB605D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDF1A0271F62682A00DB605D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDF1A02E1F626F2A00DB605D /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
+		CDF1A0311F62716E00DB605D /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				CDF1A0221F62682A00DB605D /* Assets.xcassets */,
 				CDF1A0241F62682A00DB605D /* LaunchScreen.storyboard */,
 				CDF1A0271F62682A00DB605D /* Info.plist */,
+				CDF1A0311F62716E00DB605D /* SocketManager.swift */,
 			);
 			path = VTTF;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF1A01E1F62682A00DB605D /* ViewController.swift in Sources */,
+				CDF1A0321F62716E00DB605D /* SocketManager.swift in Sources */,
 				CDF1A01C1F62682A00DB605D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

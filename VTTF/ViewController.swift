@@ -10,10 +10,11 @@ import UIKit
 
 
 class ViewController: UIViewController {
+    fileprivate let socketManager = SocketManager.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        socketManager.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +22,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
 }
 
+extension ViewController: SocketManagerDelegate {
+    func manager(manager: SocketManager, scrollBy move: (Int, Int)) {
+        print("dx = \(move.0), dy = \(move.1)")
+    }
+}
