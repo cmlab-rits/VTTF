@@ -12,6 +12,7 @@
 		CDF1A0211F62682A00DB605D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A01F1F62682A00DB605D /* Main.storyboard */; };
 		CDF1A0231F62682A00DB605D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A0221F62682A00DB605D /* Assets.xcassets */; };
 		CDF1A0261F62682A00DB605D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A0241F62682A00DB605D /* LaunchScreen.storyboard */; };
+		CDF1A02F1F626F2A00DB605D /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF1A02E1F626F2A00DB605D /* CocoaAsyncSocket.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CDF1A0221F62682A00DB605D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDF1A0251F62682A00DB605D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDF1A0271F62682A00DB605D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDF1A02E1F626F2A00DB605D /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF1A02F1F626F2A00DB605D /* CocoaAsyncSocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +43,7 @@
 			children = (
 				CDF1A01A1F62682A00DB605D /* VTTF */,
 				CDF1A0191F62682A00DB605D /* Products */,
+				CDF1A02D1F626F2A00DB605D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +68,14 @@
 			path = VTTF;
 			sourceTree = "<group>";
 		};
+		CDF1A02D1F626F2A00DB605D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDF1A02E1F626F2A00DB605D /* CocoaAsyncSocket.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,6 +86,7 @@
 				CDF1A0141F62682A00DB605D /* Sources */,
 				CDF1A0151F62682A00DB605D /* Frameworks */,
 				CDF1A0161F62682A00DB605D /* Resources */,
+				CDF1A0301F626F8700DB605D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -131,6 +144,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CDF1A0301F626F8700DB605D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaAsyncSocket.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CDF1A0141F62682A00DB605D /* Sources */ = {
@@ -264,6 +294,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QGP94B3XD8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = VTTF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.ritsumei.is.cm.VTTF.VTTF;
@@ -277,6 +311,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QGP94B3XD8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = VTTF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.ritsumei.is.cm.VTTF.VTTF;
