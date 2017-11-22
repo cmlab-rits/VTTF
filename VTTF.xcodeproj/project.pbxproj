@@ -43,6 +43,19 @@
 		CD551CBD1FC57C1400FEEAEA /* EnumCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551C991FC57C1400FEEAEA /* EnumCodable.swift */; };
 		CD551CBE1FC57C1400FEEAEA /* KEViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551C9A1FC57C1400FEEAEA /* KEViewController.swift */; };
 		CD551CBF1FC57C1400FEEAEA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD551C9B1FC57C1400FEEAEA /* README.md */; };
+		CD551CC21FC57CD600FEEAEA /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CC11FC57CD600FEEAEA /* MCManager.swift */; };
+		CD551CCD1FC57D0300FEEAEA /* BaseApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CC41FC57D0300FEEAEA /* BaseApplicationViewController.swift */; };
+		CD551CCE1FC57D0300FEEAEA /* FieldObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CC61FC57D0300FEEAEA /* FieldObject.swift */; };
+		CD551CCF1FC57D0300FEEAEA /* AppEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CC71FC57D0300FEEAEA /* AppEnums.swift */; };
+		CD551CD01FC57D0300FEEAEA /* OperationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CC81FC57D0300FEEAEA /* OperationMessage.swift */; };
+		CD551CD11FC57D0300FEEAEA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CC91FC57D0300FEEAEA /* Player.swift */; };
+		CD551CD21FC57D0300FEEAEA /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CCA1FC57D0300FEEAEA /* Object.swift */; };
+		CD551CD31FC57D0300FEEAEA /* BaseApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CCB1FC57D0300FEEAEA /* BaseApplicationManager.swift */; };
+		CD551CD41FC57D0300FEEAEA /* BaseAppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CCC1FC57D0300FEEAEA /* BaseAppLabel.swift */; };
+		CD551CDA1FC57D7300FEEAEA /* EnumEnumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CD61FC57D7300FEEAEA /* EnumEnumerable.swift */; };
+		CD551CDB1FC57D7300FEEAEA /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CD71FC57D7300FEEAEA /* CGPointExtension.swift */; };
+		CD551CDC1FC57D7300FEEAEA /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CD81FC57D7300FEEAEA /* UIViewControllerExtension.swift */; };
+		CD551CDD1FC57D7300FEEAEA /* NandemoExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CD91FC57D7300FEEAEA /* NandemoExtenstion.swift */; };
 		CDF1A01C1F62682A00DB605D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A01B1F62682A00DB605D /* AppDelegate.swift */; };
 		CDF1A01E1F62682A00DB605D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A01D1F62682A00DB605D /* ViewController.swift */; };
 		CDF1A0211F62682A00DB605D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A01F1F62682A00DB605D /* Main.storyboard */; };
@@ -51,7 +64,6 @@
 		CDF1A02F1F626F2A00DB605D /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF1A02E1F626F2A00DB605D /* CocoaAsyncSocket.framework */; };
 		CDF1A0321F62716E00DB605D /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A0311F62716E00DB605D /* SocketManager.swift */; };
 		CDF1A0341F62797000DB605D /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A0331F62797000DB605D /* TestViewController.swift */; };
-		CDF1A0361F627BAF00DB605D /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A0351F627BAF00DB605D /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +103,19 @@
 		CD551C991FC57C1400FEEAEA /* EnumCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumCodable.swift; sourceTree = "<group>"; };
 		CD551C9A1FC57C1400FEEAEA /* KEViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KEViewController.swift; sourceTree = "<group>"; };
 		CD551C9B1FC57C1400FEEAEA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CD551CC11FC57CD600FEEAEA /* MCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
+		CD551CC41FC57D0300FEEAEA /* BaseApplicationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApplicationViewController.swift; sourceTree = "<group>"; };
+		CD551CC61FC57D0300FEEAEA /* FieldObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldObject.swift; sourceTree = "<group>"; };
+		CD551CC71FC57D0300FEEAEA /* AppEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppEnums.swift; sourceTree = "<group>"; };
+		CD551CC81FC57D0300FEEAEA /* OperationMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationMessage.swift; sourceTree = "<group>"; };
+		CD551CC91FC57D0300FEEAEA /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		CD551CCA1FC57D0300FEEAEA /* Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		CD551CCB1FC57D0300FEEAEA /* BaseApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApplicationManager.swift; sourceTree = "<group>"; };
+		CD551CCC1FC57D0300FEEAEA /* BaseAppLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAppLabel.swift; sourceTree = "<group>"; };
+		CD551CD61FC57D7300FEEAEA /* EnumEnumerable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumEnumerable.swift; sourceTree = "<group>"; };
+		CD551CD71FC57D7300FEEAEA /* CGPointExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
+		CD551CD81FC57D7300FEEAEA /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		CD551CD91FC57D7300FEEAEA /* NandemoExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NandemoExtenstion.swift; sourceTree = "<group>"; };
 		CDF1A0181F62682A00DB605D /* VTTF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VTTF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF1A01B1F62682A00DB605D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF1A01D1F62682A00DB605D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,7 +126,6 @@
 		CDF1A02E1F626F2A00DB605D /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		CDF1A0311F62716E00DB605D /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		CDF1A0331F62797000DB605D /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		CDF1A0351F627BAF00DB605D /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +231,49 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		CD551CC01FC57CA800FEEAEA /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				CD551CC11FC57CD600FEEAEA /* MCManager.swift */,
+				CDF1A0311F62716E00DB605D /* SocketManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		CD551CC31FC57D0300FEEAEA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				CD551CC51FC57D0300FEEAEA /* Model */,
+				CD551CC41FC57D0300FEEAEA /* BaseApplicationViewController.swift */,
+				CD551CCB1FC57D0300FEEAEA /* BaseApplicationManager.swift */,
+				CD551CCC1FC57D0300FEEAEA /* BaseAppLabel.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		CD551CC51FC57D0300FEEAEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CD551CC61FC57D0300FEEAEA /* FieldObject.swift */,
+				CD551CC71FC57D0300FEEAEA /* AppEnums.swift */,
+				CD551CC81FC57D0300FEEAEA /* OperationMessage.swift */,
+				CD551CC91FC57D0300FEEAEA /* Player.swift */,
+				CD551CCA1FC57D0300FEEAEA /* Object.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CD551CD51FC57D7300FEEAEA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CD551CD61FC57D7300FEEAEA /* EnumEnumerable.swift */,
+				CD551CD71FC57D7300FEEAEA /* CGPointExtension.swift */,
+				CD551CD81FC57D7300FEEAEA /* UIViewControllerExtension.swift */,
+				CD551CD91FC57D7300FEEAEA /* NandemoExtenstion.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		CDF1A00F1F62682A00DB605D = {
 			isa = PBXGroup;
 			children = (
@@ -227,16 +294,17 @@
 		CDF1A01A1F62682A00DB605D /* VTTF */ = {
 			isa = PBXGroup;
 			children = (
-				CD551C711FC57BD900FEEAEA /* OtherLibrary */,
 				CDF1A01B1F62682A00DB605D /* AppDelegate.swift */,
+				CD551CD51FC57D7300FEEAEA /* Extension */,
+				CD551CC31FC57D0300FEEAEA /* Application */,
+				CD551CC01FC57CA800FEEAEA /* Manager */,
 				CDF1A01D1F62682A00DB605D /* ViewController.swift */,
 				CDF1A0331F62797000DB605D /* TestViewController.swift */,
 				CDF1A01F1F62682A00DB605D /* Main.storyboard */,
 				CDF1A0221F62682A00DB605D /* Assets.xcassets */,
 				CDF1A0241F62682A00DB605D /* LaunchScreen.storyboard */,
 				CDF1A0271F62682A00DB605D /* Info.plist */,
-				CDF1A0311F62716E00DB605D /* SocketManager.swift */,
-				CDF1A0351F627BAF00DB605D /* UIViewExtension.swift */,
+				CD551C711FC57BD900FEEAEA /* OtherLibrary */,
 			);
 			path = VTTF;
 			sourceTree = "<group>";
@@ -349,34 +417,46 @@
 				CD551CA11FC57C1400FEEAEA /* AKPickerView.swift in Sources */,
 				CD551CAB1FC57C1400FEEAEA /* String+.swift in Sources */,
 				CD551CB21FC57C1400FEEAEA /* UITableView+.swift in Sources */,
-				CDF1A0361F627BAF00DB605D /* UIViewExtension.swift in Sources */,
 				CD551C9F1FC57C1400FEEAEA /* DOAlertController.swift in Sources */,
 				CD551C9D1FC57C1400FEEAEA /* KELogger.swift in Sources */,
 				CD551CB01FC57C1400FEEAEA /* NSArray+.swift in Sources */,
 				CDF1A01E1F62682A00DB605D /* ViewController.swift in Sources */,
 				CD551CAF1FC57C1400FEEAEA /* UIButton+.swift in Sources */,
 				CD551CAE1FC57C1400FEEAEA /* Dictionary+.swift in Sources */,
+				CD551CD21FC57D0300FEEAEA /* Object.swift in Sources */,
 				CD551CA21FC57C1400FEEAEA /* CGPoint+.swift in Sources */,
 				CD551CBE1FC57C1400FEEAEA /* KEViewController.swift in Sources */,
 				CD551CA01FC57C1400FEEAEA /* URLDataSession.swift in Sources */,
 				CD551C9E1FC57C1400FEEAEA /* Math.swift in Sources */,
 				CD551CBC1FC57C1400FEEAEA /* TypeShowable.swift in Sources */,
 				CD551CBA1FC57C1400FEEAEA /* KEUtility.swift in Sources */,
+				CD551CD41FC57D0300FEEAEA /* BaseAppLabel.swift in Sources */,
 				CD551CB11FC57C1400FEEAEA /* Date+.swift in Sources */,
+				CD551CC21FC57CD600FEEAEA /* MCManager.swift in Sources */,
 				CD551CBD1FC57C1400FEEAEA /* EnumCodable.swift in Sources */,
 				CDF1A0321F62716E00DB605D /* SocketManager.swift in Sources */,
 				CD551CA51FC57C1400FEEAEA /* UIFont+.swift in Sources */,
 				CD551CAD1FC57C1400FEEAEA /* UIImageView+.swift in Sources */,
 				CD551CA71FC57C1400FEEAEA /* CGRect+.swift in Sources */,
+				CD551CD31FC57D0300FEEAEA /* BaseApplicationManager.swift in Sources */,
+				CD551CD01FC57D0300FEEAEA /* OperationMessage.swift in Sources */,
 				CD551CA61FC57C1400FEEAEA /* NSLayoutConstraint+.swift in Sources */,
+				CD551CDB1FC57D7300FEEAEA /* CGPointExtension.swift in Sources */,
 				CD551CB61FC57C1400FEEAEA /* KERand.swift in Sources */,
+				CD551CDA1FC57D7300FEEAEA /* EnumEnumerable.swift in Sources */,
 				CD551CA81FC57C1400FEEAEA /* Array+.swift in Sources */,
+				CD551CD11FC57D0300FEEAEA /* Player.swift in Sources */,
+				CD551CDC1FC57D7300FEEAEA /* UIViewControllerExtension.swift in Sources */,
 				CD551CBB1FC57C1400FEEAEA /* EnumEnumerable.swift in Sources */,
+				CD551CCE1FC57D0300FEEAEA /* FieldObject.swift in Sources */,
 				CD551CA41FC57C1400FEEAEA /* NSObject+.swift in Sources */,
+				CD551CDD1FC57D7300FEEAEA /* NandemoExtenstion.swift in Sources */,
 				CD551CB31FC57C1400FEEAEA /* NSCoder+.swift in Sources */,
 				CD551CAA1FC57C1400FEEAEA /* UIView+.swift in Sources */,
+				CD551CCF1FC57D0300FEEAEA /* AppEnums.swift in Sources */,
 				CD551CB51FC57C1400FEEAEA /* NSDictionary+.swift in Sources */,
 				CD551CA91FC57C1400FEEAEA /* IndexPath+.swift in Sources */,
+				CD551CCD1FC57D0300FEEAEA /* BaseApplicationViewController.swift in Sources */,
 				CD551CAC1FC57C1400FEEAEA /* CGSize+.swift in Sources */,
 				CD551CB41FC57C1400FEEAEA /* UIColor+.swift in Sources */,
 				CDF1A0341F62797000DB605D /* TestViewController.swift in Sources */,
