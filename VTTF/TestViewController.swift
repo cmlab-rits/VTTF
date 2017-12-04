@@ -8,11 +8,12 @@
 
 import UIKit
 
-class TestViewController: UIViewController {
+class TestViewController: UIViewController, SocketManagerDelegate {
 
     fileprivate let socketManager = SocketManager.sharedInstance
-    let pointingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-
+    let pointingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.socketManager.delegate = self
@@ -28,13 +29,11 @@ class TestViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
     
-}
-
-extension TestViewController: SocketManagerDelegate {
     func manager(manager: SocketManager, scrollBy move: (Int, Int)) {
         self.pointingView.midX += CGFloat(move.0)
         self.pointingView.midY += CGFloat(move.1)
     }
+    
 }
+
