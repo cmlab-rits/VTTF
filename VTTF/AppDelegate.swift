@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow( frame: UIScreen.main.bounds )
         self.window?.makeKeyAndVisible()
 
-        let vc = TestViewController()
+        let vc = FirstScrollViewController()
         self.window?.rootViewController = vc
 
         return true

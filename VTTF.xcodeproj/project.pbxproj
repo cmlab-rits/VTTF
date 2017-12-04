@@ -9,20 +9,21 @@
 /* Begin PBXBuildFile section */
 		CDF1A01C1F62682A00DB605D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A01B1F62682A00DB605D /* AppDelegate.swift */; };
 		CDF1A01E1F62682A00DB605D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A01D1F62682A00DB605D /* ViewController.swift */; };
-		CDF1A0211F62682A00DB605D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A01F1F62682A00DB605D /* Main.storyboard */; };
 		CDF1A0231F62682A00DB605D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A0221F62682A00DB605D /* Assets.xcassets */; };
 		CDF1A0261F62682A00DB605D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A0241F62682A00DB605D /* LaunchScreen.storyboard */; };
 		CDF1A02F1F626F2A00DB605D /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF1A02E1F626F2A00DB605D /* CocoaAsyncSocket.framework */; };
 		CDF1A0321F62716E00DB605D /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A0311F62716E00DB605D /* SocketManager.swift */; };
 		CDF1A0341F62797000DB605D /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A0331F62797000DB605D /* TestViewController.swift */; };
 		CDF1A0361F627BAF00DB605D /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A0351F627BAF00DB605D /* UIViewExtension.swift */; };
+		F442A9F41F84AFB200A3B878 /* FirstScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F442A9F31F84AFB200A3B878 /* FirstScrollViewController.swift */; };
+		F44B9D491FB0428600703CF4 /* VttfLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B9D481FB0428600703CF4 /* VttfLabel.swift */; };
+		F46CC1A61FD1675E0048B96B /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46CC1A51FD1675E0048B96B /* MCManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CDF1A0181F62682A00DB605D /* VTTF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VTTF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF1A01B1F62682A00DB605D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF1A01D1F62682A00DB605D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CDF1A0201F62682A00DB605D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDF1A0221F62682A00DB605D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDF1A0251F62682A00DB605D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDF1A0271F62682A00DB605D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -30,6 +31,9 @@
 		CDF1A0311F62716E00DB605D /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		CDF1A0331F62797000DB605D /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		CDF1A0351F627BAF00DB605D /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		F442A9F31F84AFB200A3B878 /* FirstScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstScrollViewController.swift; sourceTree = "<group>"; };
+		F44B9D481FB0428600703CF4 /* VttfLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VttfLabel.swift; sourceTree = "<group>"; };
+		F46CC1A51FD1675E0048B96B /* MCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,12 +71,14 @@
 				CDF1A01B1F62682A00DB605D /* AppDelegate.swift */,
 				CDF1A01D1F62682A00DB605D /* ViewController.swift */,
 				CDF1A0331F62797000DB605D /* TestViewController.swift */,
-				CDF1A01F1F62682A00DB605D /* Main.storyboard */,
 				CDF1A0221F62682A00DB605D /* Assets.xcassets */,
 				CDF1A0241F62682A00DB605D /* LaunchScreen.storyboard */,
 				CDF1A0271F62682A00DB605D /* Info.plist */,
 				CDF1A0311F62716E00DB605D /* SocketManager.swift */,
 				CDF1A0351F627BAF00DB605D /* UIViewExtension.swift */,
+				F442A9F31F84AFB200A3B878 /* FirstScrollViewController.swift */,
+				F44B9D481FB0428600703CF4 /* VttfLabel.swift */,
+				F46CC1A51FD1675E0048B96B /* MCManager.swift */,
 			);
 			path = VTTF;
 			sourceTree = "<group>";
@@ -118,7 +124,7 @@
 				TargetAttributes = {
 					CDF1A0171F62682A00DB605D = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = QGP94B3XD8;
+						DevelopmentTeam = 7LHSW9VBV8;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -148,7 +154,6 @@
 			files = (
 				CDF1A0261F62682A00DB605D /* LaunchScreen.storyboard in Resources */,
 				CDF1A0231F62682A00DB605D /* Assets.xcassets in Resources */,
-				CDF1A0211F62682A00DB605D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +185,9 @@
 				CDF1A01E1F62682A00DB605D /* ViewController.swift in Sources */,
 				CDF1A0321F62716E00DB605D /* SocketManager.swift in Sources */,
 				CDF1A0341F62797000DB605D /* TestViewController.swift in Sources */,
+				F44B9D491FB0428600703CF4 /* VttfLabel.swift in Sources */,
+				F46CC1A61FD1675E0048B96B /* MCManager.swift in Sources */,
+				F442A9F41F84AFB200A3B878 /* FirstScrollViewController.swift in Sources */,
 				CDF1A01C1F62682A00DB605D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,14 +195,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CDF1A01F1F62682A00DB605D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CDF1A0201F62682A00DB605D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CDF1A0241F62682A00DB605D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -305,12 +305,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QGP94B3XD8;
+				DEVELOPMENT_TEAM = 7LHSW9VBV8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = VTTF/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.ritsumei.is.cm.VTTF.VTTF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -322,12 +323,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QGP94B3XD8;
+				DEVELOPMENT_TEAM = 7LHSW9VBV8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = VTTF/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.ritsumei.is.cm.VTTF.VTTF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -354,6 +356,7 @@
 				CDF1A02C1F62682A00DB605D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
