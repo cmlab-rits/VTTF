@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import KELibrary
 
 protocol BaseAppLabelDelegate {
     func appLabel(touchesBegan label: BaseAppLabel)

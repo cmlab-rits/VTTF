@@ -8,7 +8,6 @@
 
 import UIKit
 import MultipeerConnectivity
-import KELibrary
 
 protocol BaseAppManagerDelegate {
 }

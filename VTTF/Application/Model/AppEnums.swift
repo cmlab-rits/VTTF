@@ -19,6 +19,15 @@ enum ItemType {
     case object
 }
 
+
+enum RoleInApp: String{
+    case leader = "leader"
+    case member = "member"
+}
+
+extension RoleInApp: EnumEnumerable {}
+
+
 enum Direction: String {
     case front = "正面"
     case back = "反対"
@@ -27,3 +36,4 @@ enum Direction: String {
 //    case manual(CGFloat)
 }
 extension Direction: EnumEnumerable {}
+

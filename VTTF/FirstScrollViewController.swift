@@ -8,13 +8,13 @@
 
 import UIKit
 import MultipeerConnectivity
-enum Direction {
-    case a
-    case b
-    case c
-    case d
-    
-}
+//enum Direction {
+//    case a
+//    case b
+//    case c
+//    case d
+//
+//}
 
 class FirstScrollViewController: UIViewController, UIScrollViewDelegate{
     private let manager = SocketManager.sharedInstance
@@ -26,7 +26,7 @@ class FirstScrollViewController: UIViewController, UIScrollViewDelegate{
     var labelList: [VttfLabel] = []
     private var taskLabelCount: Int = 15
     
-    var direction: Direction = .b
+    var direction: Direction = .front
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,22 +67,22 @@ class FirstScrollViewController: UIViewController, UIScrollViewDelegate{
             label.vc = self
             self.scrollView.addSubview(label)
             labelList.append(label)
-            mcManager.send(data: <#T##Data#>)
+//            mcManager.send(data: )
         }
     }
     
-    func convertPosition(point: CGPoint) -> CGPoint {
-        switch self.direction {
-        case .a:
-            return point
-        case .b:
-            return CGPoint (x: point.x, y: scrollView.size.height  - point.y)
-        case .c:
-            return CGPoint (x: scrollView.size.width - point.x, y: scrollView.size.height - point.y)
-        case .d:
-            return CGPoint (x: scrollView.size.width - point.x, y: point.y)
-        }
-    }
+//    func convertPosition(point: CGPoint) -> CGPoint {
+//        switch self.direction {
+//        case .a:
+//            return point
+//        case .b:
+//            return CGPoint (x: point.x, y: scrollView.size.height  - point.y)
+//        case .c:
+//            return CGPoint (x: scrollView.size.width - point.x, y: scrollView.size.height - point.y)
+//        case .d:
+//            return CGPoint (x: scrollView.size.width - point.x, y: point.y)
+//        }
+//    }
 //        case a: {(point:CGPoint: (width:x,height:y)) -> CGPoint in return CGPoint(width:x,height:y)}
 //        case b: = {(point:CGPoint: (width:x,heifht:y)) -> CGPoint in return CGPoint(width:x,height:height-y)}
 //        case c: = {(point:CGPoint:(width:x,height:y)) -> CGPoint in return CGPoint(width:width-x,height:height-y)}

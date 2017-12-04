@@ -11,14 +11,12 @@ import UIKit
 class BaseApplicationViewController: UIViewController {
 
     private let appManager = BaseApplicationManager.sharedInstance
-    private let ccManager = ColorCoordinateManager.sharedInstance
 
     private var scrollView = AppScrollView()
     private var contentView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ccManager.addDelegate(target: self)
         appManager.delegate = self
 
         // たかはし: ここではUIScrollViewではなく独自実装のscrollViewを宣言
@@ -38,13 +36,6 @@ class BaseApplicationViewController: UIViewController {
         addLabel()
         scrollView.delegate = self
         scrollView.pinchGestureRecognizer?.addTarget(self, action: #selector(pinchAction(sender:)))
-
-        let actionButton: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "Setting"), style: .plain, target: self, action: #selector(MonitoringViewController.didPushSettingButton))
-        self.navigationItem.rightBarButtonItem = actionButton
-    }
-
-    @objc func didPushSettingButton() {
-        self.present(SettingNavigationViewController(), animated: true, completion: nil)
     }
 
     @objc func pinchAction(sender: UIPinchGestureRecognizer) {
@@ -99,48 +90,25 @@ extension BaseApplicationViewController: UIScrollViewDelegate {
 extension BaseApplicationViewController: BaseAppManagerDelegate {
 }
 
-
-extension BaseApplicationViewController: ColorCoordinateManagerDelegate {
-    func updatePosition(manager: ColorCoordinateManager, position: PositionModel) {
-        let newX = (scrollView.contentSize.width * position.x) - (view.frame.width / 2 )
-        let newY = scrollView.contentSize.height * position.y - (view.frame.height / 2 )
-
-        appManager.updateOwnPlayerPosition(point: CGPoint(x: newX, y: newY))
-
-        UIView.animate(withDuration: 0.1, animations: {
-            self.scrollView.contentOffset.x = newX
-            self.scrollView.contentOffset.y = newY
-
-        })
-
-
-    }
-
-    func updateCaribration(manager: ColorCoordinateManager, progress: Float){}
-    func completeCaribration(manager: ColorCoordinateManager, color: ColorModel){}
-    func ccManager(manager: ColorCoordinateManager, updateNewModelToSaturationScaleCaribration color: ColorModel, count: Int){}
-    func ccManager(manager: ColorCoordinateManager, updateColorPattern type: ColorPatternType){}
-}
-
-class AppScrollView: UIScrollView {
-    public func scrollLock() {
-        self.isScrollEnabled = false
-    }
-
-    public func scrollUnlock() {
-        self.isScrollEnabled = true
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.next?.touchesBegan(touches, with: event)
-    }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.next?.touchesMoved(touches, with: event)
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.next?.touchesEnded(touches, with: event)
-    }
-}
+//class AppScrollView: UIScrollView {
+//    public func scrollLock() {
+//        self.isScrollEnabled = false
+//    }
+//
+//    public func scrollUnlock() {
+//        self.isScrollEnabled = true
+//    }
+//
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.next?.touchesBegan(touches, with: event)
+//    }
+//
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.next?.touchesMoved(touches, with: event)
+//    }
+//
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.next?.touchesEnded(touches, with: event)
+//    }
+//}
 

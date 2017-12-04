@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import KELibrary
 
 extension Int {
     var cgFloat: CGFloat{

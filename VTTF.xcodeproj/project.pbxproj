@@ -52,11 +52,9 @@
 		CD551CD21FC57D0300FEEAEA /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CCA1FC57D0300FEEAEA /* Object.swift */; };
 		CD551CD31FC57D0300FEEAEA /* BaseApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CCB1FC57D0300FEEAEA /* BaseApplicationManager.swift */; };
 		CD551CD41FC57D0300FEEAEA /* BaseAppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CCC1FC57D0300FEEAEA /* BaseAppLabel.swift */; };
-		CD551CDA1FC57D7300FEEAEA /* EnumEnumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CD61FC57D7300FEEAEA /* EnumEnumerable.swift */; };
-		CD551CDB1FC57D7300FEEAEA /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CD71FC57D7300FEEAEA /* CGPointExtension.swift */; };
-		CD551CDC1FC57D7300FEEAEA /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CD81FC57D7300FEEAEA /* UIViewControllerExtension.swift */; };
 		CD551CDD1FC57D7300FEEAEA /* NandemoExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CD91FC57D7300FEEAEA /* NandemoExtenstion.swift */; };
 		CDD217F11FD540AF00EA15B5 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD217F01FD540AF00EA15B5 /* SocketManager.swift */; };
+		CDD217F31FD544EC00EA15B5 /* RandomUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD217F21FD544EC00EA15B5 /* RandomUtil.swift */; };
 		CDF1A01C1F62682A00DB605D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A01B1F62682A00DB605D /* AppDelegate.swift */; };
 		CDF1A01E1F62682A00DB605D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A01D1F62682A00DB605D /* ViewController.swift */; };
 		CDF1A0231F62682A00DB605D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A0221F62682A00DB605D /* Assets.xcassets */; };
@@ -65,7 +63,6 @@
 		CDF1A0341F62797000DB605D /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A0331F62797000DB605D /* TestViewController.swift */; };
 		F442A9F41F84AFB200A3B878 /* FirstScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F442A9F31F84AFB200A3B878 /* FirstScrollViewController.swift */; };
 		F44B9D491FB0428600703CF4 /* VttfLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B9D481FB0428600703CF4 /* VttfLabel.swift */; };
-		F46CC1A61FD1675E0048B96B /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46CC1A51FD1675E0048B96B /* MCManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,11 +111,9 @@
 		CD551CCA1FC57D0300FEEAEA /* Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		CD551CCB1FC57D0300FEEAEA /* BaseApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApplicationManager.swift; sourceTree = "<group>"; };
 		CD551CCC1FC57D0300FEEAEA /* BaseAppLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAppLabel.swift; sourceTree = "<group>"; };
-		CD551CD61FC57D7300FEEAEA /* EnumEnumerable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumEnumerable.swift; sourceTree = "<group>"; };
-		CD551CD71FC57D7300FEEAEA /* CGPointExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
-		CD551CD81FC57D7300FEEAEA /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		CD551CD91FC57D7300FEEAEA /* NandemoExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NandemoExtenstion.swift; sourceTree = "<group>"; };
 		CDD217F01FD540AF00EA15B5 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		CDD217F21FD544EC00EA15B5 /* RandomUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomUtil.swift; sourceTree = "<group>"; };
 		CDF1A0181F62682A00DB605D /* VTTF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VTTF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF1A01B1F62682A00DB605D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF1A01D1F62682A00DB605D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -129,7 +124,6 @@
 		CDF1A0331F62797000DB605D /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		F442A9F31F84AFB200A3B878 /* FirstScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstScrollViewController.swift; sourceTree = "<group>"; };
 		F44B9D481FB0428600703CF4 /* VttfLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VttfLabel.swift; sourceTree = "<group>"; };
-		F46CC1A51FD1675E0048B96B /* MCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,9 +263,7 @@
 		CD551CD51FC57D7300FEEAEA /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				CD551CD61FC57D7300FEEAEA /* EnumEnumerable.swift */,
-				CD551CD71FC57D7300FEEAEA /* CGPointExtension.swift */,
-				CD551CD81FC57D7300FEEAEA /* UIViewControllerExtension.swift */,
+				CDD217F21FD544EC00EA15B5 /* RandomUtil.swift */,
 				CD551CD91FC57D7300FEEAEA /* NandemoExtenstion.swift */,
 			);
 			path = Extension;
@@ -309,7 +301,6 @@
 				CD551C711FC57BD900FEEAEA /* OtherLibrary */,
 				F442A9F31F84AFB200A3B878 /* FirstScrollViewController.swift */,
 				F44B9D481FB0428600703CF4 /* VttfLabel.swift */,
-				F46CC1A51FD1675E0048B96B /* MCManager.swift */,
 				CDD217F01FD540AF00EA15B5 /* SocketManager.swift */,
 			);
 			path = VTTF;
@@ -446,12 +437,9 @@
 				CD551CD31FC57D0300FEEAEA /* BaseApplicationManager.swift in Sources */,
 				CD551CD01FC57D0300FEEAEA /* OperationMessage.swift in Sources */,
 				CD551CA61FC57C1400FEEAEA /* NSLayoutConstraint+.swift in Sources */,
-				CD551CDB1FC57D7300FEEAEA /* CGPointExtension.swift in Sources */,
 				CD551CB61FC57C1400FEEAEA /* KERand.swift in Sources */,
-				CD551CDA1FC57D7300FEEAEA /* EnumEnumerable.swift in Sources */,
 				CD551CA81FC57C1400FEEAEA /* Array+.swift in Sources */,
 				CD551CD11FC57D0300FEEAEA /* Player.swift in Sources */,
-				CD551CDC1FC57D7300FEEAEA /* UIViewControllerExtension.swift in Sources */,
 				CD551CBB1FC57C1400FEEAEA /* EnumEnumerable.swift in Sources */,
 				CD551CCE1FC57D0300FEEAEA /* FieldObject.swift in Sources */,
 				CD551CA41FC57C1400FEEAEA /* NSObject+.swift in Sources */,
@@ -463,10 +451,10 @@
 				CD551CA91FC57C1400FEEAEA /* IndexPath+.swift in Sources */,
 				CD551CCD1FC57D0300FEEAEA /* BaseApplicationViewController.swift in Sources */,
 				CD551CAC1FC57C1400FEEAEA /* CGSize+.swift in Sources */,
+				CDD217F31FD544EC00EA15B5 /* RandomUtil.swift in Sources */,
 				CD551CB41FC57C1400FEEAEA /* UIColor+.swift in Sources */,
 				CDF1A0341F62797000DB605D /* TestViewController.swift in Sources */,
 				F44B9D491FB0428600703CF4 /* VttfLabel.swift in Sources */,
-				F46CC1A61FD1675E0048B96B /* MCManager.swift in Sources */,
 				F442A9F41F84AFB200A3B878 /* FirstScrollViewController.swift in Sources */,
 				CDF1A01C1F62682A00DB605D /* AppDelegate.swift in Sources */,
 			);

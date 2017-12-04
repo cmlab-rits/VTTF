@@ -61,7 +61,7 @@ class VttfLabel: UILabel {
     }
 
     
-    func timeOut(tm: Timer) {
+    @objc func timeOut(tm: Timer) {
         print("timeOut")
         timer?.invalidate()
         if caught == false {
