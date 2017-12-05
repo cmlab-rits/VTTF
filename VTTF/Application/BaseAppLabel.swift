@@ -24,6 +24,7 @@ class BaseAppLabel: UILabel {
     var n: Int = 0
     var startPoint: CGPoint?
     var labelPoint: CGPoint?
+    var endPoint: CGPoint?
     var timer: Timer?
     var caught = false
 
@@ -50,8 +51,11 @@ class BaseAppLabel: UILabel {
     }
 
     func moveLabelWithAnimation(start: CGPoint, end: CGPoint) {
-        UIView.animate(withDuration: 2.0, animations: {
-            self.midPoint = end
+        UIView.animate(withDuration: TimeInterval(CGFloat(1.0)), animations: {() -> Void in
+            // 移動先の座標を指定する.
+            self.center = end
+
+        }, completion: {(Bool) -> Void in
         })
     }
 
@@ -74,17 +78,18 @@ class BaseAppLabel: UILabel {
             let dy = point!.y - startPoint!.y
             print("dx:\(dx),dy:\(dy)")
 
-            var endPoint = CGPoint(x: self.labelPoint!.x + dx * 3, y: self.labelPoint!.y + dy * 3)
+            endPoint = CGPoint(x: self.labelPoint!.x + dx * 3, y: self.labelPoint!.y + dy * 3)
             UIView.animate(withDuration: TimeInterval(CGFloat(1.0)), animations: {() -> Void in
                 // 移動先の座標を指定する.
-                self.center = endPoint
+                self.center = self.endPoint!
 
             }, completion: {(Bool) -> Void in
             })
-            self.delegate?.appLabel(flickMoved: self, start: startPoint!, end: endPoint)
-//            vc?.scrollView.scrollUnlock()
-            timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.timeOut), userInfo: nil, repeats: false)
-            caught = false
+            self.delegate?.appLabel(flickMoved: self, start: startPoint!, end: endPoint!)
+            startPoint = self.center
+            //            vc?.scrollView.scrollUnlock()
+//            timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.timeOut), userInfo: nil, repeats: false)
+//            caught = false
         }
     }
 
@@ -150,7 +155,7 @@ class BaseAppLabel: UILabel {
         }
     }
     func makeEncodedBaseAppLabelFlickedData() -> Data? {
-        if let start = startPoint, let end = labelPoint {
+        if let start = startPoint, let end = endPoint {
             let d =  BaseAppLabelFlickedData(id: id, start: start, end: end)
             let encoder = JSONEncoder()
             do {

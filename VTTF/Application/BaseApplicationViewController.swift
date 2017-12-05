@@ -88,27 +88,9 @@ extension BaseApplicationViewController: UIScrollViewDelegate {
 }
 
 extension BaseApplicationViewController: BaseAppManagerDelegate {
+    func appManager(manager: BaseApplicationManager, scroll move: (Int, Int)) {
+        self.scrollView.contentOffset.x += move.0.cgFloat
+        self.scrollView.contentOffset.y += move.1.cgFloat
+
+    }
 }
-
-//class AppScrollView: UIScrollView {
-//    public func scrollLock() {
-//        self.isScrollEnabled = false
-//    }
-//
-//    public func scrollUnlock() {
-//        self.isScrollEnabled = true
-//    }
-//
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.next?.touchesBegan(touches, with: event)
-//    }
-//
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.next?.touchesMoved(touches, with: event)
-//    }
-//
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.next?.touchesEnded(touches, with: event)
-//    }
-//}
-

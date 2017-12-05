@@ -10,12 +10,15 @@ import UIKit
 import MultipeerConnectivity
 
 protocol BaseAppManagerDelegate {
+    func appManager(manager: BaseApplicationManager, scroll move: (Int, Int))
 }
 
 class BaseApplicationManager: NSObject {
     static let sharedInstance = BaseApplicationManager()
 
     private let mcManager = MCManager.sharedInstance
+
+    private let socketManager = SocketManager.sharedInstance
 
     private var viewController: BaseApplicationViewController?
 
@@ -49,6 +52,7 @@ class BaseApplicationManager: NSObject {
     override init() {
         super.init()
         mcManager.delegate = self
+        socketManager.delegate = self
     }
 
     func startApplication() {
@@ -260,7 +264,6 @@ class BaseApplicationManager: NSObject {
             let covertedEndPoint = convertFromBasisPointToDirectionPoint(dir: dir, from: baseAppLabelFlickedData.end)
             label.moveLabelWithAnimation(start: label.midPoint, end: covertedEndPoint)
         }
-
     }
 
     private func receiveMovePlayerOperation(data: Data) {
@@ -310,6 +313,11 @@ extension BaseApplicationManager: MCManagerDelegate {
     }
 }
 
+extension BaseApplicationManager: SocketManagerDelegate {
+    func manager(manager: SocketManager, scrollBy move: (Int, Int)) {
+        self.delegate?.appManager(manager: self, scroll: move)
+    }
+}
 
 
 
