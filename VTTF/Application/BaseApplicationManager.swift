@@ -185,8 +185,19 @@ class BaseApplicationManager: NSObject {
     }
     /// ラベルの移動
     func shareMoveLabel(label: BaseAppLabel) {
+        print("sharelabel")
         if let labelData = label.makeEncodedBaseAppLabelData() {
             let message = OperationMessage(operation: Operation.moveLabel.rawValue, data: labelData)
+            if let data = message.encode() {
+                mcManager.send(data: data)
+            }
+        }
+    }
+
+    /// フリックによるラベルの移動
+    func shareFlickedLabel(label: BaseAppLabel, start: CGPoint, end: CGPoint) {
+        if let flickedData = label.makeEncodedBaseAppLabelFlickedData() {
+            let message = OperationMessage(operation: Operation.flickedLabel.rawValue, data: flickedData)
             if let data = message.encode() {
                 mcManager.send(data: data)
             }
@@ -210,13 +221,15 @@ class BaseApplicationManager: NSObject {
         let decoder = JSONDecoder()
         guard let decodedMessage = try? decoder.decode(OperationMessage.self, from: data) else { return }
         guard let operationType = Operation(rawValue: decodedMessage.operation) else { return }
-
+        print(operationType.rawValue)
         let data = decodedMessage.data
         switch operationType {
         case .initalLabel:
             receiveInitalLabelOperation(data: data)
         case .moveLabel:
             receiveMoveLabelOperation(data: data)
+        case .flickedLabel:
+            receiveFlickedLabelOperation(data: data)
         case .movePlayer:
             receiveMovePlayerOperation(data: data)
         }
@@ -238,6 +251,16 @@ class BaseApplicationManager: NSObject {
         if let label = label, let dir = direction {
             label.midPoint = convertFromBasisPointToDirectionPoint(dir: dir, from: baseAppLabelData.position)
         }
+    }
+
+    private func receiveFlickedLabelOperation(data: Data) {
+        guard let baseAppLabelFlickedData: BaseAppLabelFlickedData = try? JSONDecoder().decode(BaseAppLabelFlickedData.self, from: data) else { return }
+        let label = fieldLabels.filter{ $0.id == baseAppLabelFlickedData.id }.first
+        if let label = label, let dir = direction {
+            let covertedEndPoint = convertFromBasisPointToDirectionPoint(dir: dir, from: baseAppLabelFlickedData.end)
+            label.moveLabelWithAnimation(start: label.midPoint, end: covertedEndPoint)
+        }
+
     }
 
     private func receiveMovePlayerOperation(data: Data) {
@@ -265,13 +288,18 @@ extension BaseApplicationManager: BaseAppLabelDelegate {
         viewController?.scrollUnlock()
         shareMoveLabel(label: label)
     }
+
+    func appLabel(flickMoved label: BaseAppLabel, start: CGPoint, end: CGPoint) {
+        shareFlickedLabel(label: label, start: start, end: end)
+    }
 }
 
 extension BaseApplicationManager: MCManagerDelegate {
     func mcManager(manager: MCManager, session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case .connected:
-            initalizeShareAllLabel(to: peerID)
+            print("connected")
+//            initalizeShareAllLabel(to: peerID)
         default:
             break
         }

@@ -18,7 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow( frame: UIScreen.main.bounds )
         self.window?.makeKeyAndVisible()
 
-        let vc = FirstScrollViewController()
+        let vc = BaseApplicationViewController()
+        BaseApplicationManager.sharedInstance.setupInitialSetting(role: .leader, dir: .front, vc: vc)
+
+//        let vc = FirstScrollViewController()
+//        let vc = InitialApplicationSettingViewController.instantiate()
         self.window?.rootViewController = vc
 
         return true

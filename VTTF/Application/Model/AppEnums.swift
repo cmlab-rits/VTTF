@@ -25,7 +25,7 @@ enum RoleInApp: String{
     case member = "member"
 }
 
-extension RoleInApp: EnumEnumerable {}
+//extension RoleInApp: EnumEnumerable {}
 
 
 enum Direction: String {
