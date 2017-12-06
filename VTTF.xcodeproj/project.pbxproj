@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD16F1341FD644E300360783 /* InitialApplicationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD16F1331FD644E300360783 /* InitialApplicationSettingViewController.swift */; };
+		CD16F1361FD6458F00360783 /* InitialApplicationSettingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD16F1351FD6458F00360783 /* InitialApplicationSettingViewController.storyboard */; };
 		CD551C9C1FC57C1400FEEAEA /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CD551C731FC57C1400FEEAEA /* LICENSE */; };
 		CD551C9D1FC57C1400FEEAEA /* KELogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551C761FC57C1400FEEAEA /* KELogger.swift */; };
 		CD551C9E1FC57C1400FEEAEA /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551C771FC57C1400FEEAEA /* Math.swift */; };
@@ -56,7 +58,6 @@
 		CDD217F11FD540AF00EA15B5 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD217F01FD540AF00EA15B5 /* SocketManager.swift */; };
 		CDD217F31FD544EC00EA15B5 /* RandomUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD217F21FD544EC00EA15B5 /* RandomUtil.swift */; };
 		CDF1A01C1F62682A00DB605D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A01B1F62682A00DB605D /* AppDelegate.swift */; };
-		CDF1A01E1F62682A00DB605D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A01D1F62682A00DB605D /* ViewController.swift */; };
 		CDF1A0231F62682A00DB605D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A0221F62682A00DB605D /* Assets.xcassets */; };
 		CDF1A0261F62682A00DB605D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF1A0241F62682A00DB605D /* LaunchScreen.storyboard */; };
 		CDF1A02F1F626F2A00DB605D /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF1A02E1F626F2A00DB605D /* CocoaAsyncSocket.framework */; };
@@ -66,6 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD16F1331FD644E300360783 /* InitialApplicationSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialApplicationSettingViewController.swift; sourceTree = "<group>"; };
+		CD16F1351FD6458F00360783 /* InitialApplicationSettingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InitialApplicationSettingViewController.storyboard; sourceTree = "<group>"; };
 		CD551C731FC57C1400FEEAEA /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CD551C761FC57C1400FEEAEA /* KELogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KELogger.swift; sourceTree = "<group>"; };
 		CD551C771FC57C1400FEEAEA /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
@@ -112,11 +115,10 @@
 		CD551CCB1FC57D0300FEEAEA /* BaseApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApplicationManager.swift; sourceTree = "<group>"; };
 		CD551CCC1FC57D0300FEEAEA /* BaseAppLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAppLabel.swift; sourceTree = "<group>"; };
 		CD551CD91FC57D7300FEEAEA /* NandemoExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NandemoExtenstion.swift; sourceTree = "<group>"; };
-		CDD217F01FD540AF00EA15B5 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		CDD217F01FD540AF00EA15B5 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketManager.swift; path = ../SocketManager.swift; sourceTree = "<group>"; };
 		CDD217F21FD544EC00EA15B5 /* RandomUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomUtil.swift; sourceTree = "<group>"; };
 		CDF1A0181F62682A00DB605D /* VTTF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VTTF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF1A01B1F62682A00DB605D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CDF1A01D1F62682A00DB605D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CDF1A0221F62682A00DB605D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDF1A0251F62682A00DB605D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDF1A0271F62682A00DB605D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				CD551CC11FC57CD600FEEAEA /* MCManager.swift */,
+				CDD217F01FD540AF00EA15B5 /* SocketManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -293,15 +296,15 @@
 				CD551CD51FC57D7300FEEAEA /* Extension */,
 				CD551CC31FC57D0300FEEAEA /* Application */,
 				CD551CC01FC57CA800FEEAEA /* Manager */,
-				CDF1A01D1F62682A00DB605D /* ViewController.swift */,
-				CDF1A0331F62797000DB605D /* TestViewController.swift */,
+				CD551C711FC57BD900FEEAEA /* OtherLibrary */,
 				CDF1A0221F62682A00DB605D /* Assets.xcassets */,
 				CDF1A0241F62682A00DB605D /* LaunchScreen.storyboard */,
 				CDF1A0271F62682A00DB605D /* Info.plist */,
-				CD551C711FC57BD900FEEAEA /* OtherLibrary */,
 				F442A9F31F84AFB200A3B878 /* FirstScrollViewController.swift */,
+				CDF1A0331F62797000DB605D /* TestViewController.swift */,
 				F44B9D481FB0428600703CF4 /* VttfLabel.swift */,
-				CDD217F01FD540AF00EA15B5 /* SocketManager.swift */,
+				CD16F1351FD6458F00360783 /* InitialApplicationSettingViewController.storyboard */,
+				CD16F1331FD644E300360783 /* InitialApplicationSettingViewController.swift */,
 			);
 			path = VTTF;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				CDF1A0261F62682A00DB605D /* LaunchScreen.storyboard in Resources */,
 				CDF1A0231F62682A00DB605D /* Assets.xcassets in Resources */,
 				CD551CB81FC57C1400FEEAEA /* fontawesome.ttf in Resources */,
+				CD16F1361FD6458F00360783 /* InitialApplicationSettingViewController.storyboard in Resources */,
 				CD551C9C1FC57C1400FEEAEA /* LICENSE in Resources */,
 				CD551CB91FC57C1400FEEAEA /* mplus-1p-regular.ttf in Resources */,
 				CD551CBF1FC57C1400FEEAEA /* README.md in Resources */,
@@ -417,7 +421,6 @@
 				CD551C9F1FC57C1400FEEAEA /* DOAlertController.swift in Sources */,
 				CD551C9D1FC57C1400FEEAEA /* KELogger.swift in Sources */,
 				CD551CB01FC57C1400FEEAEA /* NSArray+.swift in Sources */,
-				CDF1A01E1F62682A00DB605D /* ViewController.swift in Sources */,
 				CD551CAF1FC57C1400FEEAEA /* UIButton+.swift in Sources */,
 				CD551CAE1FC57C1400FEEAEA /* Dictionary+.swift in Sources */,
 				CD551CD21FC57D0300FEEAEA /* Object.swift in Sources */,
@@ -429,6 +432,7 @@
 				CD551CBA1FC57C1400FEEAEA /* KEUtility.swift in Sources */,
 				CD551CD41FC57D0300FEEAEA /* BaseAppLabel.swift in Sources */,
 				CD551CB11FC57C1400FEEAEA /* Date+.swift in Sources */,
+				CD16F1341FD644E300360783 /* InitialApplicationSettingViewController.swift in Sources */,
 				CD551CC21FC57CD600FEEAEA /* MCManager.swift in Sources */,
 				CD551CBD1FC57C1400FEEAEA /* EnumCodable.swift in Sources */,
 				CD551CA51FC57C1400FEEAEA /* UIFont+.swift in Sources */,

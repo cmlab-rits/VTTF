@@ -11,6 +11,7 @@ import Foundation
 enum Operation: String {
     case initalLabel = "initallabel"
     case moveLabel = "movelabel"
+    case flickedLabel = "flickedLabel"
     case movePlayer = "movePlayer"
 }
 

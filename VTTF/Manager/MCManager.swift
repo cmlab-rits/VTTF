@@ -22,7 +22,7 @@ protocol MCManagerDelegate {
 class MCManager: NSObject {
     static let sharedInstance = MCManager()
 
-    fileprivate let serviceType = "test"
+    fileprivate let serviceType = "vttf-mc-key"
     fileprivate let timeoutInterval = 0.0
     fileprivate let ownID: MCPeerID
     fileprivate let browser: MCNearbyServiceBrowser
@@ -40,7 +40,7 @@ class MCManager: NSObject {
         ownID = MCPeerID(displayName: UIDevice.current.name)
         browser = MCNearbyServiceBrowser(peer: ownID, serviceType: serviceType)
         advertiser = MCNearbyServiceAdvertiser(peer: ownID, discoveryInfo: nil, serviceType: serviceType)
-        session = MCSession(peer: ownID)
+        session = MCSession(peer: ownID, securityIdentity: nil, encryptionPreference: .optional)
 
         super.init()
 
@@ -108,7 +108,9 @@ extension MCManager: MCNearbyServiceAdvertiserDelegate {
 
 extension MCManager: MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        delegate?.mcManager(manager: self, session: session, didReceive: data, from: peerID)
+        dispatchOnMainThread {
+            self.delegate?.mcManager(manager: self, session: session, didReceive: data, from: peerID)
+        }
     }
 
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
@@ -122,6 +124,7 @@ extension MCManager: MCSessionDelegate {
     }
 
     func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
+        certificateHandler(true)
     }
 
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
