@@ -11,6 +11,8 @@ import MultipeerConnectivity
 
 protocol BaseAppManagerDelegate {
     func appManager(manager: BaseApplicationManager, scroll move: (Int, Int))
+    func appManager(manager: BaseApplicationManager, initalize labels: [BaseAppLabel])
+    func appManager(manager: BaseApplicationManager, add player: Player, view: UIView)
 }
 
 class BaseApplicationManager: NSObject {
@@ -35,6 +37,8 @@ class BaseApplicationManager: NSObject {
     var delegate: BaseAppManagerDelegate?
     
     var fieldLabels: [BaseAppLabel] = []
+
+    var playerPositionView: [UIView] = []
 
     var basisWorkspaceSize: CGSize = CGSize(width: 3500, height: 3500)
 
@@ -71,11 +75,12 @@ class BaseApplicationManager: NSObject {
         startApplication()
     }
 
-    func updateOwnPlayerPosition(point: CGPoint) {
+    private func updateOwnPlayerPosition(point: CGPoint) {
         let basePoint = convertDirectionPointToBasisPoint(dir: direction!, point: point)
         ownPlayer?.position = basePoint
     }
 
+    
 
     /// 作業空間に配置するラベルをつくる
     private func setupFieldObjects() {
@@ -117,6 +122,7 @@ class BaseApplicationManager: NSObject {
             return false
         }
     }
+
 
 
     /// 基の座標から方向に応じて座標を変換する
@@ -243,9 +249,9 @@ class BaseApplicationManager: NSObject {
     private func receiveInitalLabelOperation(data: Data) {
         let decoder = JSONDecoder()
         guard let labelDataArray: [BaseAppLabelData] = try? decoder.decode([BaseAppLabelData].self, from: data) else { return }
-        labelDataArray.forEach {
-            print($0)
-        }
+        labelDataArray.map{ BaseAppLabel(frame: CGRect(origin: convertFromBasisPointToDirectionPoint(dir: self.direction!, from: $0.position), size: CGSize(200,200)), number: 0, id: $0.id) }
+                      .forEach{ self.fieldLabels.append($0) }
+        self.delegate?.appManager(manager: self, initalize: fieldLabels)
     }
 
     /// ラベルの移動イベントを受け取った時の位置の更新
@@ -302,7 +308,10 @@ extension BaseApplicationManager: MCManagerDelegate {
         switch state {
         case .connected:
             print("connected")
-//            initalizeShareAllLabel(to: peerID)
+            if role == .leader {
+                initalizeShareAllLabel(to: peerID)
+            }
+
         default:
             break
         }

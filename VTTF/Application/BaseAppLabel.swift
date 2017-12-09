@@ -17,6 +17,7 @@ protocol BaseAppLabelDelegate {
 
 
 class BaseAppLabel: UILabel {
+
     var labelNumber: Int
     var id: String
     var delegate: BaseAppLabelDelegate?
@@ -87,9 +88,6 @@ class BaseAppLabel: UILabel {
             })
             self.delegate?.appLabel(flickMoved: self, start: startPoint!, end: endPoint!)
             startPoint = self.center
-            //            vc?.scrollView.scrollUnlock()
-//            timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.timeOut), userInfo: nil, repeats: false)
-//            caught = false
         }
     }
 

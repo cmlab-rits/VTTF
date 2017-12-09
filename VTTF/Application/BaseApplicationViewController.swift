@@ -14,9 +14,12 @@ class BaseApplicationViewController: UIViewController {
 
     private var scrollView = AppScrollView()
     private var contentView = UIView()
+    private var flickView: FlickGuideView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = false
         appManager.delegate = self
 
         // たかはし: ここではUIScrollViewではなく独自実装のscrollViewを宣言
@@ -36,9 +39,16 @@ class BaseApplicationViewController: UIViewController {
         addLabel()
         scrollView.delegate = self
         scrollView.pinchGestureRecognizer?.addTarget(self, action: #selector(pinchAction(sender:)))
+
+        flickView = FlickGuideView(frame: CGRect(origin: CGPoint(0,0), size: CGSize(self.view.frame.width, self.view.frame.width)))
+        flickView!.backgroundColor = UIColor(hue: 0, saturation: 0, brightness: 0, alpha: 0)
+        self.view.addSubview(self.flickView!)
+        flickView?.isHidden = true
+
     }
 
     @objc func pinchAction(sender: UIPinchGestureRecognizer) {
+        addFlickGuideView()
         if sender.velocity <= -0.3{
             zoomOutScrollView()
         } else if sender.velocity >= 0.3{
@@ -79,6 +89,13 @@ class BaseApplicationViewController: UIViewController {
         scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
     }
 
+    func addFlickGuideView() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.flickView?.isHidden = false
+        })
+
+    }
+
 }
 
 extension BaseApplicationViewController: UIScrollViewDelegate {
@@ -88,9 +105,41 @@ extension BaseApplicationViewController: UIScrollViewDelegate {
 }
 
 extension BaseApplicationViewController: BaseAppManagerDelegate {
+    func appManager(manager: BaseApplicationManager, initalize labels: [BaseAppLabel]) {
+        addLabel()
+    }
+
     func appManager(manager: BaseApplicationManager, scroll move: (Int, Int)) {
         self.scrollView.contentOffset.x += move.0.cgFloat
         self.scrollView.contentOffset.y += move.1.cgFloat
 
     }
+
+    func appManager(manager: BaseApplicationManager, add player: Player, view: UIView) {
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

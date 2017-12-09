@@ -55,6 +55,7 @@
 		CD551CD31FC57D0300FEEAEA /* BaseApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CCB1FC57D0300FEEAEA /* BaseApplicationManager.swift */; };
 		CD551CD41FC57D0300FEEAEA /* BaseAppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CCC1FC57D0300FEEAEA /* BaseAppLabel.swift */; };
 		CD551CDD1FC57D7300FEEAEA /* NandemoExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD551CD91FC57D7300FEEAEA /* NandemoExtenstion.swift */; };
+		CDC2FAAE1FDA669200CE53C5 /* FlickGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2FAAD1FDA669200CE53C5 /* FlickGuideView.swift */; };
 		CDD217F11FD540AF00EA15B5 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD217F01FD540AF00EA15B5 /* SocketManager.swift */; };
 		CDD217F31FD544EC00EA15B5 /* RandomUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD217F21FD544EC00EA15B5 /* RandomUtil.swift */; };
 		CDF1A01C1F62682A00DB605D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1A01B1F62682A00DB605D /* AppDelegate.swift */; };
@@ -115,6 +116,7 @@
 		CD551CCB1FC57D0300FEEAEA /* BaseApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApplicationManager.swift; sourceTree = "<group>"; };
 		CD551CCC1FC57D0300FEEAEA /* BaseAppLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAppLabel.swift; sourceTree = "<group>"; };
 		CD551CD91FC57D7300FEEAEA /* NandemoExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NandemoExtenstion.swift; sourceTree = "<group>"; };
+		CDC2FAAD1FDA669200CE53C5 /* FlickGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickGuideView.swift; sourceTree = "<group>"; };
 		CDD217F01FD540AF00EA15B5 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketManager.swift; path = ../SocketManager.swift; sourceTree = "<group>"; };
 		CDD217F21FD544EC00EA15B5 /* RandomUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomUtil.swift; sourceTree = "<group>"; };
 		CDF1A0181F62682A00DB605D /* VTTF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VTTF.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,6 +249,7 @@
 				CD551CC41FC57D0300FEEAEA /* BaseApplicationViewController.swift */,
 				CD551CCB1FC57D0300FEEAEA /* BaseApplicationManager.swift */,
 				CD551CCC1FC57D0300FEEAEA /* BaseAppLabel.swift */,
+				CDC2FAAD1FDA669200CE53C5 /* FlickGuideView.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				CD551CB21FC57C1400FEEAEA /* UITableView+.swift in Sources */,
 				CDD217F11FD540AF00EA15B5 /* SocketManager.swift in Sources */,
 				CD551C9F1FC57C1400FEEAEA /* DOAlertController.swift in Sources */,
+				CDC2FAAE1FDA669200CE53C5 /* FlickGuideView.swift in Sources */,
 				CD551C9D1FC57C1400FEEAEA /* KELogger.swift in Sources */,
 				CD551CB01FC57C1400FEEAEA /* NSArray+.swift in Sources */,
 				CD551CAF1FC57C1400FEEAEA /* UIButton+.swift in Sources */,
