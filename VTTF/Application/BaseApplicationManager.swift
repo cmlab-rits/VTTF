@@ -13,6 +13,7 @@ protocol BaseAppManagerDelegate {
     func appManager(manager: BaseApplicationManager, scroll move: (Int, Int))
     func appManager(manager: BaseApplicationManager, initalize labels: [BaseAppLabel])
     func appManager(manager: BaseApplicationManager, add player: Player, view: UIView)
+    func appManager(manager: BaseApplicationManager, longpress label: BaseAppLabel)
 }
 
 class BaseApplicationManager: NSObject {
@@ -26,14 +27,16 @@ class BaseApplicationManager: NSObject {
 
     private var ownPlayer: Player?
 
-    private var players: [Player] = []
+    var players: [Player] = []
 
     private var direction: Direction?
     
     private var role: RoleInApp?
 
     private var taskLabelCount: Int = 15
-    
+
+//    private var peerIdDictionary = [String:MCPeerID]()
+
     var delegate: BaseAppManagerDelegate?
     
     var fieldLabels: [BaseAppLabel] = []
@@ -80,7 +83,9 @@ class BaseApplicationManager: NSObject {
         ownPlayer?.position = basePoint
     }
 
-    
+    func getCurrentPositionInScrollView() -> CGPoint? {
+        return viewController?.getCurrentPositionInScrollView()
+    }
 
     /// 作業空間に配置するラベルをつくる
     private func setupFieldObjects() {
@@ -300,6 +305,10 @@ extension BaseApplicationManager: BaseAppLabelDelegate {
 
     func appLabel(flickMoved label: BaseAppLabel, start: CGPoint, end: CGPoint) {
         shareFlickedLabel(label: label, start: start, end: end)
+    }
+
+    func appLabel(longPressed label: BaseAppLabel) {
+        self.delegate?.appManager(manager: self, longpress: label)
     }
 }
 

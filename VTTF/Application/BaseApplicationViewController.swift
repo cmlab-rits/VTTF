@@ -48,7 +48,6 @@ class BaseApplicationViewController: UIViewController {
     }
 
     @objc func pinchAction(sender: UIPinchGestureRecognizer) {
-        addFlickGuideView()
         if sender.velocity <= -0.3{
             zoomOutScrollView()
         } else if sender.velocity >= 0.3{
@@ -73,6 +72,11 @@ class BaseApplicationViewController: UIViewController {
         }
     }
 
+    func getCurrentPositionInScrollView() -> CGPoint{
+        let point = CGPoint(x: self.scrollView.contentOffset.x + (view.frame.width / 2 ), y: self.scrollView.contentOffset.y + (view.frame.height / 2 ))
+        return point
+    }
+
     public func scrollLock() {
         scrollView.scrollLock()
     }
@@ -89,11 +93,17 @@ class BaseApplicationViewController: UIViewController {
         scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
     }
 
-    func addFlickGuideView() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.flickView?.isHidden = false
-        })
+    func addFlickGuideView(label: BaseAppLabel) {
 
+        UIView.animate(withDuration: 0.5, animations: {
+            label.midX = self.scrollView.contentOffset.x + (self.view.frame.width / 2)
+            label.midY = self.scrollView.contentOffset.y + (self.view.frame.width / 2)
+        })
+        self.flickView?.isHidden = false
+    }
+
+    func hideFlickGuideView() {
+        self.flickView?.isHidden = true
     }
 
 }
@@ -116,6 +126,10 @@ extension BaseApplicationViewController: BaseAppManagerDelegate {
     }
 
     func appManager(manager: BaseApplicationManager, add player: Player, view: UIView) {
+    }
+
+    func appManager(manager: BaseApplicationManager, longpress label: BaseAppLabel){
+        addFlickGuideView(label: label)
     }
 }
 

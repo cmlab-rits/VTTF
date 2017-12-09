@@ -9,11 +9,19 @@
 import UIKit
 
 class FlickGuideView: UIView {
+    typealias This = FlickGuideView
+    private let appManager = BaseApplicationManager.sharedInstance
 
-    // 20*2で40度の扇形ができる
-    let angleSize = (CGFloat.pi * 2) * 20 / 360
+    // 扇形の角度0-360
+    static let fanAngleSize: CGFloat = 40
+
+    // 扇形の計算
+    static let angleSize = (CGFloat.pi * 2) * (fanAngleSize / 2) / 360
+
     private var panStartPoint: CGPoint?
     private var panEndPoint: CGPoint?
+
+    private var playerAngle: [(Player, CGFloat)] = []
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,8 +44,8 @@ class FlickGuideView: UIView {
         context.fillEllipse(in: rect)
 
         let testAngle = angle(a: CGPoint(50, 50), b: CGPoint(50,0)) * 2 * CGFloat.pi
-        let startAngle = testAngle - angleSize
-        let endAngle = testAngle + angleSize
+        let startAngle = testAngle - This.angleSize
+        let endAngle = testAngle + This.angleSize
 
         context.setFillColor(UIColor.red.cgColor)
         context.move(to: viewCenter)
@@ -52,6 +60,14 @@ class FlickGuideView: UIView {
         setNeedsDisplay()
     }
 
+    func getPlayerAndAngle() {
+        guard let currentPoint = appManager.getCurrentPositionInScrollView() else { return }
+        for player in appManager.players {
+            let angle = self.angle(a: currentPoint, b: player.position)
+            playerAngle.append((player,angle))
+        }
+    }
+
     // return: 0-1
     func angle(a: CGPoint, b: CGPoint) -> CGFloat {
         var r = atan2(b.doubleY - a.doubleY, b.doubleX - a.doubleX)
@@ -62,7 +78,7 @@ class FlickGuideView: UIView {
         return CGFloat(val)
     }
 
-    @objc func panGesture(sender:UIPanGestureRecognizer) {
+    @objc func panGesture(sender: UIPanGestureRecognizer) {
         switch (sender.state) {
         case .began:
             panStartPoint = sender.translation(in: sender.view)
@@ -77,6 +93,12 @@ class FlickGuideView: UIView {
             break
         }
     }
+
+    func flicked(start: CGPoint, end: CGPoint) {
+        let angle = self.angle(a: start, b: end)
+    }
+
+
 }
 extension CGPoint {
     var doubleX: Double {

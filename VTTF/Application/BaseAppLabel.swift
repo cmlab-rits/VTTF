@@ -13,6 +13,7 @@ protocol BaseAppLabelDelegate {
     func appLabel(touchesMoved label: BaseAppLabel)
     func appLabel(touchesEnded label: BaseAppLabel)
     func appLabel(flickMoved label: BaseAppLabel, start: CGPoint, end: CGPoint)
+    func appLabel(longPressed label: BaseAppLabel)
 }
 
 
@@ -62,32 +63,33 @@ class BaseAppLabel: UILabel {
 
     @objc func longTouch(_ sender:UILongPressGestureRecognizer?) {
 
-        n=n+1
+//        n=n+1
         self.backgroundColor = UIColor.yellow
         let point = sender?.location(in: self.superview)
         if sender?.state == .began {
-            print("began")
-            n = 0
-            startPoint = point
-            labelPoint = self.center
+            self.delegate?.appLabel(longPressed: self)
+//            print("began")
+//            n = 0
+//            startPoint = point
+//            labelPoint = self.center
 
         } else if sender?.state == .changed {
             print("changed")
         } else if sender?.state == .ended {
-            print("ended")
-            let dx = point!.x - startPoint!.x
-            let dy = point!.y - startPoint!.y
-            print("dx:\(dx),dy:\(dy)")
-
-            endPoint = CGPoint(x: self.labelPoint!.x + dx * 3, y: self.labelPoint!.y + dy * 3)
-            UIView.animate(withDuration: TimeInterval(CGFloat(1.0)), animations: {() -> Void in
-                // 移動先の座標を指定する.
-                self.center = self.endPoint!
-
-            }, completion: {(Bool) -> Void in
-            })
-            self.delegate?.appLabel(flickMoved: self, start: startPoint!, end: endPoint!)
-            startPoint = self.center
+//            print("ended")
+//            let dx = point!.x - startPoint!.x
+//            let dy = point!.y - startPoint!.y
+//            print("dx:\(dx),dy:\(dy)")
+//
+//            endPoint = CGPoint(x: self.labelPoint!.x + dx * 3, y: self.labelPoint!.y + dy * 3)
+//            UIView.animate(withDuration: TimeInterval(CGFloat(1.0)), animations: {() -> Void in
+//                // 移動先の座標を指定する.
+//                self.center = self.endPoint!
+//
+//            }, completion: {(Bool) -> Void in
+//            })
+//            self.delegate?.appLabel(flickMoved: self, start: startPoint!, end: endPoint!)
+//            startPoint = self.center
         }
     }
 
