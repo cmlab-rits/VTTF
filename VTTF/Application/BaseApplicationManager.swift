@@ -14,6 +14,7 @@ protocol BaseAppManagerDelegate {
     func appManager(manager: BaseApplicationManager, initalize labels: [BaseAppLabel])
     func appManager(manager: BaseApplicationManager, add player: Player, view: UIView)
     func appManager(manager: BaseApplicationManager, longpress label: BaseAppLabel)
+    func appManager(manager: BaseApplicationManager, move player: Player)
 }
 
 class BaseApplicationManager: NSObject {
@@ -311,6 +312,7 @@ class BaseApplicationManager: NSObject {
         let player = players.filter{ $0.id == playerData.id }.first
         if let player = player {
             player.position = playerData.position
+            self.delegate?.appManager(manager: self, move: player)
         }
     }
 }

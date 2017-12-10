@@ -139,6 +139,12 @@ extension BaseApplicationViewController: BaseAppManagerDelegate {
     func appManager(manager: BaseApplicationManager, longpress label: BaseAppLabel){
         addFlickGuideView(label: label)
     }
+
+    func appManager(manager: BaseApplicationManager, move player: Player) {
+        if flickView?.isHidden == false {
+            flickView?.reload()
+        }
+    }
 }
 
 
