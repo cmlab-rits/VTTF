@@ -43,16 +43,19 @@ class FlickGuideView: UIView {
         context.setFillColor(UIColor(hue: 0.7, saturation: 0.5, brightness: 0.5, alpha: 0.5).cgColor)
         context.fillEllipse(in: rect)
 
-        let testAngle = angle(a: CGPoint(50, 50), b: CGPoint(50,0)) * 2 * CGFloat.pi
-        let startAngle = testAngle - This.angleSize
-        let endAngle = testAngle + This.angleSize
+        getPlayerAndAngle()
+        for pa in playerAngle {
+            let angle = pa.1 * 2 * CGFloat.pi
+            let startAngle = angle - This.angleSize
+            let endAngle = angle + This.angleSize
 
-        context.setFillColor(UIColor.red.cgColor)
-        context.move(to: viewCenter)
-        context.addArc(center: viewCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: false)
-        context.closePath()
-        context.fillPath()
+            context.setFillColor(UIColor.red.cgColor)
+            context.move(to: viewCenter)
+            context.addArc(center: viewCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: false)
+            context.closePath()
+            context.fillPath()
 
+        }
         self.backgroundColor = UIColor(hue: 0, saturation: 0, brightness: 0, alpha: 0)
     }
 
@@ -61,6 +64,7 @@ class FlickGuideView: UIView {
     }
 
     func getPlayerAndAngle() {
+        playerAngle = []
         guard let currentPoint = appManager.getCurrentPositionInScrollView() else { return }
         for player in appManager.players {
             let angle = self.angle(a: currentPoint, b: player.position)
@@ -88,6 +92,7 @@ class FlickGuideView: UIView {
             print("pan end")
             panEndPoint = sender.translation(in: sender.view)
             print(angle(a: panStartPoint!, b: panEndPoint!))
+            self.isHidden = true
             break
         default:
             break

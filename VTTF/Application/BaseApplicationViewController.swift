@@ -100,6 +100,7 @@ class BaseApplicationViewController: UIViewController {
             label.midY = self.scrollView.contentOffset.y + (self.view.frame.width / 2)
         })
         self.flickView?.isHidden = false
+        self.flickView?.reload()
     }
 
     func hideFlickGuideView() {
@@ -109,6 +110,13 @@ class BaseApplicationViewController: UIViewController {
 }
 
 extension BaseApplicationViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        appManager.updateOwnPlayerPosition(point: getCurrentPositionInScrollView())
+    }
+
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return contentView
     }

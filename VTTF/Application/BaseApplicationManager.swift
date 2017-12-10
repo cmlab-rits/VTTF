@@ -78,9 +78,10 @@ class BaseApplicationManager: NSObject {
         startApplication()
     }
 
-    private func updateOwnPlayerPosition(point: CGPoint) {
+    func updateOwnPlayerPosition(point: CGPoint) {
         let basePoint = convertDirectionPointToBasisPoint(dir: direction!, point: point)
         ownPlayer?.position = basePoint
+        shareMovePlayer()
     }
 
     func getCurrentPositionInScrollView() -> CGPoint? {
@@ -180,7 +181,7 @@ class BaseApplicationManager: NSObject {
     }
 
     /*
-     ラベルの共有系の処理
+     イベントの送信
     */
 
     /// ラベルの初期化
@@ -219,8 +220,19 @@ class BaseApplicationManager: NSObject {
         }
     }
 
+    /// 新規プレイヤーの参加
+    func shareJoinNewPlayer() {
+        if let playerData = ownPlayer?.makeEncodedPlayerData()  {
+            let message = OperationMessage(operation: Operation.joinNewPlayer.rawValue, data: playerData)
+            if let data = message.encode() {
+                mcManager.send(data: data)
+            }
+        }
+    }
+
     /// プレイヤーの移動
     func shareMovePlayer() {
+        // 後でそれぞれの方向に直す
         if let playerData = ownPlayer?.makeEncodedPlayerData() {
             let message = OperationMessage(operation: Operation.movePlayer.rawValue, data: playerData)
             if let data = message.encode() {
@@ -228,6 +240,8 @@ class BaseApplicationManager: NSObject {
             }
         }
     }
+
+
 
     /**
      message受けたときのパース
@@ -245,11 +259,17 @@ class BaseApplicationManager: NSObject {
             receiveMoveLabelOperation(data: data)
         case .flickedLabel:
             receiveFlickedLabelOperation(data: data)
+        case .joinNewPlayer:
+            receiveJoinNewPlayerOperation(data: data)
         case .movePlayer:
             receiveMovePlayerOperation(data: data)
         }
     }
 
+
+    /*
+     イベントの受信
+     */
     /// ラベルの初期の共有
     private func receiveInitalLabelOperation(data: Data) {
         let decoder = JSONDecoder()
@@ -277,14 +297,20 @@ class BaseApplicationManager: NSObject {
         }
     }
 
+    private func receiveJoinNewPlayerOperation(data: Data) {
+        guard let playerData: PlayerData = try? JSONDecoder().decode(PlayerData.self, from: data) else { return }
+        let idlist = players.map{ $0.id }
+        if !idlist.contains(playerData.id) {
+            let newPlayer = Player(id: playerData.id, name: playerData.name, position: playerData.position, type: .other)
+            players.append(newPlayer)
+        }
+    }
+
     private func receiveMovePlayerOperation(data: Data) {
         guard let playerData: PlayerData = try? JSONDecoder().decode(PlayerData.self, from: data) else { return }
         let player = players.filter{ $0.id == playerData.id }.first
         if let player = player {
             player.position = playerData.position
-        } else {
-            let newPlayer = Player(id: playerData.id, name: playerData.name, position: playerData.position, type: .other)
-            players.append(newPlayer)
         }
     }
 }
@@ -292,6 +318,7 @@ class BaseApplicationManager: NSObject {
 extension BaseApplicationManager: BaseAppLabelDelegate {
     func appLabel(touchesBegan label: BaseAppLabel) {
         viewController?.scrollLock()
+        shareMovePlayer()
     }
 
     func appLabel(touchesMoved label: BaseAppLabel) {
@@ -317,17 +344,20 @@ extension BaseApplicationManager: MCManagerDelegate {
         switch state {
         case .connected:
             print("connected")
+            shareJoinNewPlayer()
             if role == .leader {
                 initalizeShareAllLabel(to: peerID)
             }
-
         default:
             break
         }
     }
 
     func mcManager(manager: MCManager, session: MCSession, didReceive data: Data, from peer: MCPeerID) {
-        operationMessageDecode(data: data)
+        dispatchOnMainThread {
+            self.operationMessageDecode(data: data)
+        }
+
     }
 }
 
