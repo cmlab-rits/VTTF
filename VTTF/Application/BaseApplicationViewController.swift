@@ -94,7 +94,6 @@ class BaseApplicationViewController: UIViewController {
     }
 
     func addFlickGuideView(label: BaseAppLabel) {
-
         UIView.animate(withDuration: 0.5, animations: {
             label.midX = self.scrollView.contentOffset.x + (self.view.frame.width / 2)
             label.midY = self.scrollView.contentOffset.y + (self.view.frame.width / 2)
@@ -146,9 +145,6 @@ extension BaseApplicationViewController: BaseAppManagerDelegate {
         }
     }
 }
-
-
-
 
 
 

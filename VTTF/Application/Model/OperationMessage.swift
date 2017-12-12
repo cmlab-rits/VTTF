@@ -14,6 +14,7 @@ enum Operation: String {
     case flickedLabel = "flickedLabel"
     case joinNewPlayer = "joinNewPlayer"
     case movePlayer = "movePlayer"
+    case userFlickedLabel = "userFlickedLabel"
 }
 
 struct OperationMessage: Codable {

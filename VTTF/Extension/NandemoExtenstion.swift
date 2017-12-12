@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+extension UIAlertController {
+    func addActions(_ actions: [UIAlertAction]) {
+        actions.forEach{ self.addAction($0) }
+    }
+}
+
 extension Int {
     var cgFloat: CGFloat{
         return CGFloat( self )

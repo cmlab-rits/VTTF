@@ -15,7 +15,10 @@ class FlickGuideView: UIView {
     // 扇形の角度0-360
     static let fanAngleSize: CGFloat = 40
 
-    // 扇形の計算
+    // 扇形を0-1に変換
+    static let fanAngleValue: CGFloat = fanAngleSize / 360
+
+    // 扇形の半分
     static let angleSize = (CGFloat.pi * 2) * (fanAngleSize / 2) / 360
 
     private var panStartPoint: CGPoint?
@@ -92,6 +95,7 @@ class FlickGuideView: UIView {
             print("pan end")
             panEndPoint = sender.translation(in: sender.view)
             print(angle(a: panStartPoint!, b: panEndPoint!))
+            flicked(start: panStartPoint!, end: panEndPoint!)
             self.isHidden = true
             break
         default:
@@ -100,7 +104,11 @@ class FlickGuideView: UIView {
     }
 
     func flicked(start: CGPoint, end: CGPoint) {
-        let angle = self.angle(a: start, b: end)
+        let flickAngle = self.angle(a: start, b: end)
+        let selectedPlayer = playerAngle.filter{ (abs($0.1 - flickAngle) <= This.fanAngleValue) || (abs($0.1 - flickAngle) >= This.fanAngleValue - This.fanAngleValue)}.first?.0
+        if let selectedPlayer = selectedPlayer {
+            appManager.selectedPlayerByFlickedLabel(player: selectedPlayer)
+        }
     }
 
 

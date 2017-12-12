@@ -169,6 +169,18 @@ class BaseAppLabel: UILabel {
         }
     }
 
+    func makeEncodedBaseAppLabelUserFlickedData(from: Player, to: Player) -> Data? {
+        let start = CGPoint(x: self.midX, y: self.midY)
+        let d = BaseAppLabelUserFlickedData(id: id, start: start, end: to.position, fromPlayerID: from.id, toPlayerID: to.id)
+        let encoder = JSONEncoder()
+        do {
+            let encoded: Data = try encoder.encode(d)
+            return encoded
+        } catch {
+            return nil
+        }
+    }
+
 }
 
 //extension BaseAppLabel: 
@@ -183,6 +195,15 @@ struct BaseAppLabelFlickedData: Codable {
     let start: CGPoint
     let end: CGPoint
 }
+
+struct BaseAppLabelUserFlickedData: Codable{
+    let id: String
+    let start: CGPoint
+    let end: CGPoint
+    let fromPlayerID: String
+    let toPlayerID: String
+}
+
 struct BaseAppLabelListData: Codable {
     let list: [BaseAppLabelData]
 }

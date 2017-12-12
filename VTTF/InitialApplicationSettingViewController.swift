@@ -23,9 +23,9 @@ class InitialApplicationSettingViewController: UIViewController {
     
     private let cellIdentifer = "InitialApplicationSettingViewControllerCell"
     
-    private var role: RoleInApp?
-    private var app: AppType?
-    private var direction: Direction?
+    private var role: RoleInApp? = RoleInApp.leader
+    private var app: AppType? = AppType.labelapp
+    private var direction: Direction? = Direction.front
     
     override func viewDidLoad() {
         super.viewDidLoad()

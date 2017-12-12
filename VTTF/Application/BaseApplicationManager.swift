@@ -36,11 +36,11 @@ class BaseApplicationManager: NSObject {
 
     private var taskLabelCount: Int = 15
 
-//    private var peerIdDictionary = [String:MCPeerID]()
-
     var delegate: BaseAppManagerDelegate?
     
     var fieldLabels: [BaseAppLabel] = []
+
+    var currentSelectedLabel: BaseAppLabel?
 
     var playerPositionView: [UIView] = []
 
@@ -89,6 +89,13 @@ class BaseApplicationManager: NSObject {
         return viewController?.getCurrentPositionInScrollView()
     }
 
+
+    func selectedPlayerByFlickedLabel(player: Player) {
+        guard let label = self.currentSelectedLabel else { return }
+        shareUserFlickedLabel(label: label, to: player)
+        currentSelectedLabel = nil
+    }
+
     /// 作業空間に配置するラベルをつくる
     private func setupFieldObjects() {
         for i in 0..<taskLabelCount {
@@ -106,12 +113,8 @@ class BaseApplicationManager: NSObject {
     /// 作業空間の円の中でランダムな点を得る
     private func genarateRandomPointInWorkspaceCircle() -> CGPoint {
         var point = CGPoint(x: 0,y: 0)
-
-//        repeat {
-            point.x = CGFloat(KERand.minMaxRandInt(0, Int(workspaceSize.width)))
-            point.y = CGFloat(KERand.minMaxRandInt(0, Int(workspaceSize.height)))
-//        } while !checkCoodinateInCircle(point: point)
-
+        point.x = CGFloat(KERand.minMaxRandInt(0, Int(workspaceSize.width)))
+        point.y = CGFloat(KERand.minMaxRandInt(0, Int(workspaceSize.height)))
         return point
     }
 
@@ -156,6 +159,9 @@ class BaseApplicationManager: NSObject {
         return p
     }
 
+    func convertToDirectionPoint(point: CGPoint) -> CGPoint {
+        return convertFromBasisPointToDirectionPoint(dir: self.direction!, from: point)
+    }
 
     /// 方向に応じた座標から基の座標に変換する
     ///
@@ -179,6 +185,11 @@ class BaseApplicationManager: NSObject {
             p.y = basisWorkspaceSize.height - point.x
         }
         return p
+    }
+
+    // 入力された座標を自分自身の座標に応じて基の座標に変換する
+    func convertToBasisPoint(point: CGPoint) -> CGPoint {
+        return convertDirectionPointToBasisPoint(dir: self.direction!, point: point)
     }
 
     /*
@@ -221,6 +232,17 @@ class BaseApplicationManager: NSObject {
         }
     }
 
+    /// ユーザ指定のフリックによるラベルの移動
+    func shareUserFlickedLabel(label: BaseAppLabel,to player: Player){
+        guard let own = self.ownPlayer else { return }
+        if let userFlickedData = label.makeEncodedBaseAppLabelUserFlickedData(from: own, to: player) {
+            let message = OperationMessage(operation: Operation.userFlickedLabel.rawValue, data: userFlickedData)
+            if let data = message.encode() {
+                mcManager.send(data: data)
+            }
+        }
+    }
+
     /// 新規プレイヤーの参加
     func shareJoinNewPlayer() {
         if let playerData = ownPlayer?.makeEncodedPlayerData()  {
@@ -242,8 +264,6 @@ class BaseApplicationManager: NSObject {
         }
     }
 
-
-
     /**
      message受けたときのパース
      */
@@ -251,7 +271,7 @@ class BaseApplicationManager: NSObject {
         let decoder = JSONDecoder()
         guard let decodedMessage = try? decoder.decode(OperationMessage.self, from: data) else { return }
         guard let operationType = Operation(rawValue: decodedMessage.operation) else { return }
-        print(operationType.rawValue)
+        print("operation:" + operationType.rawValue)
         let data = decodedMessage.data
         switch operationType {
         case .initalLabel:
@@ -260,6 +280,8 @@ class BaseApplicationManager: NSObject {
             receiveMoveLabelOperation(data: data)
         case .flickedLabel:
             receiveFlickedLabelOperation(data: data)
+        case .userFlickedLabel:
+            receiveUserFlickedLabelOparation(data: data)
         case .joinNewPlayer:
             receiveJoinNewPlayerOperation(data: data)
         case .movePlayer:
@@ -296,6 +318,26 @@ class BaseApplicationManager: NSObject {
             let covertedEndPoint = convertFromBasisPointToDirectionPoint(dir: dir, from: baseAppLabelFlickedData.end)
             label.moveLabelWithAnimation(start: label.midPoint, end: covertedEndPoint)
         }
+    }
+
+    private func receiveUserFlickedLabelOparation(data: Data) {
+        guard let labelData = try? JSONDecoder().decode(BaseAppLabelUserFlickedData.self, from: data) else { return }
+        let label = fieldLabels.filter{ $0.id == labelData.id }.first
+
+        if let label = label {
+            let convertedEndPoint = convertToDirectionPoint(point: labelData.end)
+            label.center = convertedEndPoint
+            if labelData.toPlayerID == self.ownPlayer?.id {
+                let alert = UIAlertController(title: "受信", message: "ラベルを受け取りますか", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                let cancelAction = UIAlertAction(title: "拒否", style: .cancel, handler: { (_) -> () in
+                    label.center = self.convertToDirectionPoint(point: labelData.start)
+                    self.shareMoveLabel(label: label)
+                })
+                alert.addActions([cancelAction, okAction])
+                viewController?.present(alert, animated: true, completion: nil)
+            }
+         }
     }
 
     private func receiveJoinNewPlayerOperation(data: Data) {
@@ -337,6 +379,7 @@ extension BaseApplicationManager: BaseAppLabelDelegate {
     }
 
     func appLabel(longPressed label: BaseAppLabel) {
+        self.currentSelectedLabel = label
         self.delegate?.appManager(manager: self, longpress: label)
     }
 }
@@ -359,7 +402,6 @@ extension BaseApplicationManager: MCManagerDelegate {
         dispatchOnMainThread {
             self.operationMessageDecode(data: data)
         }
-
     }
 }
 
