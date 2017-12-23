@@ -105,14 +105,16 @@ class FlickGuideView: UIView {
 
     func flicked(start: CGPoint, end: CGPoint) {
         let flickAngle = self.angle(a: start, b: end)
-        let selectedPlayer = playerAngle.filter{ (abs($0.1 - flickAngle) <= This.fanAngleValue) || (abs($0.1 - flickAngle) >= This.fanAngleValue - This.fanAngleValue)}.first?.0
+        let selectedPlayer = playerAngle.filter{ (abs($0.1 - flickAngle) <= This.fanAngleValue) || (abs($0.1 - flickAngle) >= 1 - This.fanAngleValue)}.first?.0
         if let selectedPlayer = selectedPlayer {
             appManager.selectedPlayerByFlickedLabel(player: selectedPlayer)
+
         }
+
     }
 
-
 }
+
 extension CGPoint {
     var doubleX: Double {
         return Double(self.x)

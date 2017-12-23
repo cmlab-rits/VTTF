@@ -34,7 +34,7 @@ class BaseApplicationManager: NSObject {
     
     private var role: RoleInApp?
 
-    private var taskLabelCount: Int = 15
+    private var taskLabelCount: Int = 20
 
     var delegate: BaseAppManagerDelegate?
     
@@ -56,7 +56,7 @@ class BaseApplicationManager: NSObject {
             return CGSize(width: basisWorkspaceSize.height, height: basisWorkspaceSize.width)
         }
     }
-    
+
     override init() {
         super.init()
         mcManager.delegate = self
@@ -80,7 +80,7 @@ class BaseApplicationManager: NSObject {
     }
 
     func updateOwnPlayerPosition(point: CGPoint) {
-        let basePoint = convertDirectionPointToBasisPoint(dir: direction!, point: point)
+        let basePoint = convertToBasisPoint(point: point)
         ownPlayer?.position = basePoint
         shareMovePlayer()
     }
@@ -92,6 +92,7 @@ class BaseApplicationManager: NSObject {
 
     func selectedPlayerByFlickedLabel(player: Player) {
         guard let label = self.currentSelectedLabel else { return }
+        label.midPoint = player.position
         shareUserFlickedLabel(label: label, to: player)
         currentSelectedLabel = nil
     }
@@ -298,7 +299,7 @@ class BaseApplicationManager: NSObject {
         let decoder = JSONDecoder()
         guard let labelDataArray: [BaseAppLabelData] = try? decoder.decode([BaseAppLabelData].self, from: data) else { return }
         labelDataArray.map{ BaseAppLabel(frame: CGRect(origin: convertFromBasisPointToDirectionPoint(dir: self.direction!, from: $0.position), size: CGSize(200,200)), number: 0, id: $0.id) }
-                      .forEach{ self.fieldLabels.append($0) }
+                .forEach{  $0.delegate = self ; self.fieldLabels.append($0) }
         self.delegate?.appManager(manager: self, initalize: fieldLabels)
     }
 
@@ -353,7 +354,7 @@ class BaseApplicationManager: NSObject {
         guard let playerData: PlayerData = try? JSONDecoder().decode(PlayerData.self, from: data) else { return }
         let player = players.filter{ $0.id == playerData.id }.first
         if let player = player {
-            player.position = playerData.position
+            player.position = convertToDirectionPoint(point: playerData.position)
             self.delegate?.appManager(manager: self, move: player)
         }
     }

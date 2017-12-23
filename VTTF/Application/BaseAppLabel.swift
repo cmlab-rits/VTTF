@@ -18,16 +18,14 @@ protocol BaseAppLabelDelegate {
 
 
 class BaseAppLabel: UILabel {
-
+    var appManager = BaseApplicationManager.sharedInstance
     var labelNumber: Int
     var id: String
     var delegate: BaseAppLabelDelegate?
 
-    var n: Int = 0
     var startPoint: CGPoint?
     var labelPoint: CGPoint?
     var endPoint: CGPoint?
-    var timer: Timer?
     var caught = false
 
 
@@ -62,54 +60,34 @@ class BaseAppLabel: UILabel {
     }
 
     @objc func longTouch(_ sender:UILongPressGestureRecognizer?) {
-
-//        n=n+1
         self.backgroundColor = UIColor.yellow
-        let point = sender?.location(in: self.superview)
+//        let point = sender?.location(in: self.superview)
         if sender?.state == .began {
             self.delegate?.appLabel(longPressed: self)
-//            print("began")
-//            n = 0
-//            startPoint = point
-//            labelPoint = self.center
-
         } else if sender?.state == .changed {
             print("changed")
         } else if sender?.state == .ended {
-//            print("ended")
-//            let dx = point!.x - startPoint!.x
-//            let dy = point!.y - startPoint!.y
-//            print("dx:\(dx),dy:\(dy)")
+
+        }
+    }
+
+
+//    @objc func timeOut(tm: Timer) {
+//        print("timeOut")
+//        timer?.invalidate()
+//        if caught == false {
+//            UIView.animate(withDuration: TimeInterval(CGFloat(1.0)),
+//                           animations: {() -> Void in
 //
-//            endPoint = CGPoint(x: self.labelPoint!.x + dx * 3, y: self.labelPoint!.y + dy * 3)
-//            UIView.animate(withDuration: TimeInterval(CGFloat(1.0)), animations: {() -> Void in
-//                // 移動先の座標を指定する.
-//                self.center = self.endPoint!
+//                            // 移動先の座標を指定する.
+//                            self.center = CGPoint(x: self.labelPoint!.x, y: self.labelPoint!.y);
 //
 //            }, completion: {(Bool) -> Void in
 //            })
-//            self.delegate?.appLabel(flickMoved: self, start: startPoint!, end: endPoint!)
-//            startPoint = self.center
-        }
-    }
-
-
-    @objc func timeOut(tm: Timer) {
-        print("timeOut")
-        timer?.invalidate()
-        if caught == false {
-            UIView.animate(withDuration: TimeInterval(CGFloat(1.0)),
-                           animations: {() -> Void in
-
-                            // 移動先の座標を指定する.
-                            self.center = CGPoint(x: self.labelPoint!.x, y: self.labelPoint!.y);
-
-            }, completion: {(Bool) -> Void in
-            })
-        }
-
-        // do something
-    }
+//        }
+//
+//        // do something
+//    }
 
     // たかはし:タッチ操作が始まったタイミングでscrollViewのスクロール操作を停止する
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -141,11 +119,11 @@ class BaseAppLabel: UILabel {
     }
 
     func makeBaseAppLabel() -> BaseAppLabelData {
-        return BaseAppLabelData(id: id, position: self.midPoint)
+        return BaseAppLabelData(id: id, position: appManager.convertToBasisPoint(point: self.midPoint))
     }
 
     func makeEncodedBaseAppLabelData() -> Data? {
-        let data = BaseAppLabelData(id: id, position: self.frame.center)
+        let data = BaseAppLabelData(id: id, position: appManager.convertToBasisPoint(point: self.midPoint))
         let encoder = JSONEncoder()
         do {
             let encoded: Data = try encoder.encode(data)
@@ -154,6 +132,7 @@ class BaseAppLabel: UILabel {
             return nil
         }
     }
+
     func makeEncodedBaseAppLabelFlickedData() -> Data? {
         if let start = startPoint, let end = endPoint {
             let d =  BaseAppLabelFlickedData(id: id, start: start, end: end)
@@ -170,8 +149,9 @@ class BaseAppLabel: UILabel {
     }
 
     func makeEncodedBaseAppLabelUserFlickedData(from: Player, to: Player) -> Data? {
-        let start = CGPoint(x: self.midX, y: self.midY)
-        let d = BaseAppLabelUserFlickedData(id: id, start: start, end: to.position, fromPlayerID: from.id, toPlayerID: to.id)
+        let start = appManager.convertToBasisPoint(point: self.midPoint)
+        let end = appManager.convertToBasisPoint(point: to.position)
+        let d = BaseAppLabelUserFlickedData(id: id, start: start, end: end, fromPlayerID: from.id, toPlayerID: to.id)
         let encoder = JSONEncoder()
         do {
             let encoded: Data = try encoder.encode(d)

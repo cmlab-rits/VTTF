@@ -33,6 +33,7 @@ class BaseApplicationViewController: UIViewController {
 
 
         contentView = UIView(frame: CGRect(origin: CGPoint(0,0), size: appManager.workspaceSize))
+        contentView.backgroundColor = UIColor.asbestos
         scrollView.addSubview(contentView)
         // MEMO: 間違ってるけどカラーセンサでは絶対位置を取ってくるからどうでもいい
         scrollView.contentOffset = calcStartPoint()
@@ -72,7 +73,7 @@ class BaseApplicationViewController: UIViewController {
         }
     }
 
-    func getCurrentPositionInScrollView() -> CGPoint{
+    func getCurrentPositionInScrollView() -> CGPoint {
         let point = CGPoint(x: self.scrollView.contentOffset.x + (view.frame.width / 2 ), y: self.scrollView.contentOffset.y + (view.frame.height / 2 ))
         return point
     }
@@ -94,10 +95,11 @@ class BaseApplicationViewController: UIViewController {
     }
 
     func addFlickGuideView(label: BaseAppLabel) {
-        UIView.animate(withDuration: 0.5, animations: {
-            label.midX = self.scrollView.contentOffset.x + (self.view.frame.width / 2)
-            label.midY = self.scrollView.contentOffset.y + (self.view.frame.width / 2)
-        })
+//        UIView.animate(withDuration: 0.5, animations: {
+//            label.midX = self.scrollView.contentOffset.x + (self.view.frame.width / 2)
+//            label.midY = self.scrollView.contentOffset.y + (self.view.frame.width / 2)
+//        })
+
         self.flickView?.isHidden = false
         self.flickView?.reload()
     }
