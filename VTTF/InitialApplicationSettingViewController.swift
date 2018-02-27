@@ -10,11 +10,22 @@ import UIKit
 
 enum AppType: String {
     case monitoring = "モニタリング"
-    case labelapp = "ラベル動かし"
+    case labelapp = "VTTF"
+}
+
+enum Flick: String {
+    case on = "あり"
+    case off = "なし"
+}
+enum StartPosition: String{
+    case left = "左"
+    case right = "右"
 }
 
 extension AppType: EnumEnumerable {}
 extension RoleInApp: EnumEnumerable {}
+extension Flick: EnumEnumerable {}
+extension StartPosition: EnumEnumerable {}
 
 class InitialApplicationSettingViewController: UIViewController {
 
@@ -23,9 +34,11 @@ class InitialApplicationSettingViewController: UIViewController {
     
     private let cellIdentifer = "InitialApplicationSettingViewControllerCell"
     
-    private var role: RoleInApp?
-    private var app: AppType?
-    private var direction: Direction?
+    private var role: RoleInApp? = .member
+    private var app: AppType? = .labelapp
+    private var direction: Direction? = .front
+    private var flick: Flick? = .on
+    private var startPotiton: StartPosition? = .left
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,21 +111,61 @@ class InitialApplicationSettingViewController: UIViewController {
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
-
     }
+    
+    func showAlertChoiceFlick() {
+        let alert = UIAlertController(title: "フリックの有無を選択してください", message: "", preferredStyle: .actionSheet)
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRectMake(0, 0, self.view.bounds.width/2, self.view.bounds.height/2)
+            popoverController.permittedArrowDirections = .any
+        }
+        
+        for item in Flick.cases {
+            let action = UIAlertAction(title: item.rawValue, style: .default, handler: { _ in
+                self.flick = item
+                self.tableView.reloadData()
+            })
+            alert.addAction(action)
+        }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    func showAlertChoiceStartPosition() {
+        let alert = UIAlertController(title: "初期位置", message: "", preferredStyle: .actionSheet)
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRectMake(0, 0, self.view.bounds.width/2, self.view.bounds.height/2)
+            popoverController.permittedArrowDirections = .any
+        }
+        
+        for item in StartPosition.cases {
+            let action = UIAlertAction(title: item.rawValue, style: .default, handler: { _ in
+                self.startPotiton = item
+                self.tableView.reloadData()
+            })
+            alert.addAction(action)
+        }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
     
     @IBAction func didTouchUpStartButton(_ sender: UIButton) {
         guard let app = app else { return }
         guard let role = role else { return }
         guard let direction  = direction else { return }
-        
+        guard let flick = flick else {return}
+        guard let start = startPotiton else { return }
         switch app {
         case .monitoring:
             break;
 //            self.navigationController?.pushViewController(MonitoringViewController.instantiate(), animated: true)
         case .labelapp:
             let vc = BaseApplicationViewController()
-            BaseApplicationManager.sharedInstance.setupInitialSetting(role: role, dir: direction, vc: vc)
+            BaseApplicationManager.sharedInstance.setupInitialSetting(role: role, dir: direction, flick: flick,startPotiton: start ,vc: vc)
             self.navigationController?.pushViewController(vc, animated: true)
             break
         }
@@ -131,8 +184,14 @@ extension InitialApplicationSettingViewController: UITableViewDataSource {
             cell.textLabel?.text = "役割"
             cell.detailTextLabel?.text = role?.rawValue
         case 2:
-            cell.textLabel?.text = "初期位置"
+            cell.textLabel?.text = "初期方向"
             cell.detailTextLabel?.text = direction?.rawValue
+        case 3:
+            cell.textLabel?.text = "フリック"
+            cell.detailTextLabel?.text = flick?.rawValue
+        case 4:
+            cell.textLabel?.text = "初期位置"
+            cell.detailTextLabel?.text = startPotiton?.rawValue
         default:
             break
         }
@@ -140,7 +199,7 @@ extension InitialApplicationSettingViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 5
     }
 }
 
@@ -154,6 +213,10 @@ extension InitialApplicationSettingViewController: UITableViewDelegate {
             showAlertChoiceRole()
         case 2:
             showAlertChoiceDirection()
+        case 3:
+            showAlertChoiceFlick()
+        case 4:
+            showAlertChoiceStartPosition()
         default:
             break
         }

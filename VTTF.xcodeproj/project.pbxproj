@@ -126,6 +126,7 @@
 		CDF1A0331F62797000DB605D /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		F442A9F31F84AFB200A3B878 /* FirstScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstScrollViewController.swift; sourceTree = "<group>"; };
 		F44B9D481FB0428600703CF4 /* VttfLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VttfLabel.swift; sourceTree = "<group>"; };
+		F45013E61FE1062D00CE650C /* CocoaAsyncSocket */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CocoaAsyncSocket; path = Carthage/Checkouts/CocoaAsyncSocket; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +313,7 @@
 		CDF1A02D1F626F2A00DB605D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F45013E61FE1062D00CE650C /* CocoaAsyncSocket */,
 				CDF1A02E1F626F2A00DB605D /* CocoaAsyncSocket.framework */,
 			);
 			name = Frameworks;

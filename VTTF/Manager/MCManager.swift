@@ -40,7 +40,7 @@ class MCManager: NSObject {
         ownID = MCPeerID(displayName: UIDevice.current.name)
         browser = MCNearbyServiceBrowser(peer: ownID, serviceType: serviceType)
         advertiser = MCNearbyServiceAdvertiser(peer: ownID, discoveryInfo: nil, serviceType: serviceType)
-        session = MCSession(peer: ownID, securityIdentity: nil, encryptionPreference: .optional)
+        session = MCSession(peer: ownID, securityIdentity: nil, encryptionPreference: .required)
 
         super.init()
 

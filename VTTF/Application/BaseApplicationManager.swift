@@ -24,20 +24,28 @@ class BaseApplicationManager: NSObject {
 
     private var ownPlayer: Player?
 
-    private var players: [Player] = []
+    var players: [Player] = []
 
     private var direction: Direction?
     
-    private var role: RoleInApp?
+    var role: RoleInApp?
+    
+    var flick: Flick?
+    
+    var startPotiton: StartPosition?
 
-    private var taskLabelCount: Int = 15
+    private var taskLabelCount: Int = 40
     
     var delegate: BaseAppManagerDelegate?
     
     var fieldLabels: [BaseAppLabel] = []
 
-    var basisWorkspaceSize: CGSize = CGSize(width: 3500, height: 3500)
+    var basisWorkspaceSize: CGSize = CGSize(width: 6144, height: 4096)
 
+    var timer: Timer?
+    
+    var currentSelectedLabel: BaseAppLabel?
+    
     var workspaceSize: CGSize {
         guard let direction = direction else { return basisWorkspaceSize }
 
@@ -59,32 +67,49 @@ class BaseApplicationManager: NSObject {
         guard let role = role, let direction = direction else { return }
         mcManager.startManager()
         ownPlayer = Player(id: RandomUtil.generate16length(), name: UIDevice.current.name, position: CGPointZero, type: .own)
-        if role == .leader {
-            setupFieldObjects()
+    
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.timeOut), userInfo: nil, repeats: true)
+    }
+    
+    @objc func timeOut(tm: Timer) {
+        if let offset = viewController?.scrollView.contentOffset, let dir = direction {
+            let offset2 = CGPoint(offset.x + (viewController?.view.frame.width)!/2, offset.y + (viewController?.view.frame.height)!/2)
+            let offset3 = convertFromDirectionPointToBasisPoint(dir: dir, point: offset2)
+            if ownPlayer?.position != offset3 {
+                updateOwnPlayerPosition(point: offset2)
+                shareMovePlayer()
+            }
         }
     }
     
-    func setupInitialSetting(role: RoleInApp, dir: Direction, vc: BaseApplicationViewController) {
+    
+    
+    func setupInitialSetting(role: RoleInApp, dir: Direction,flick: Flick, startPotiton: StartPosition,vc: BaseApplicationViewController) {
         self.role = role
         self.direction = dir
+        self.flick = flick
         self.viewController = vc
+        self.startPotiton = startPotiton
         startApplication()
     }
 
     func updateOwnPlayerPosition(point: CGPoint) {
-        let basePoint = convertDirectionPointToBasisPoint(dir: direction!, point: point)
+        let basePoint = convertFromDirectionPointToBasisPoint(dir: direction!, point: point)
         ownPlayer?.position = basePoint
     }
 
 
     /// 作業空間に配置するラベルをつくる
-    private func setupFieldObjects() {
+    func setupFieldObjects() {
+        print("setupFieldObjects")
+        fieldLabels.removeAll()
         for i in 0..<taskLabelCount {
-            let rect = CGRect(origin: genarateRandomPointInWorkspaceCircle(), size: CGSize(200,200))
-            let showNumber = KERand.minMaxRandInt(0, 9)
+            let rect = CGRect(origin: genarateRandomPointInWorkspaceCircle(), size: BaseAppLabel.labelSize)
+            let showNumber = ( i / 4 + 1)
             let id = "baseapplabel:\(i)"
-            let label = BaseAppLabel(frame: rect, number: showNumber, id: id)
+            let label = BaseAppLabel(frame: rect, number: showNumber, id: id, flick: flick!)
             label.delegate = self
+            label.text = String(showNumber)
             //仮
             label.tag = i
             fieldLabels.append(label)
@@ -96,8 +121,8 @@ class BaseApplicationManager: NSObject {
         var point = CGPoint(x: 0,y: 0)
 
 //        repeat {
-            point.x = CGFloat(KERand.minMaxRandInt(0, Int(workspaceSize.width)))
-            point.y = CGFloat(KERand.minMaxRandInt(0, Int(workspaceSize.height)))
+            point.x = CGFloat(KERand.minMaxRandInt(0, Int(workspaceSize.width-BaseAppLabel.labelSize.width)))
+            point.y = CGFloat(KERand.minMaxRandInt(0, Int(workspaceSize.height-BaseAppLabel.labelSize.height)))
 //        } while !checkCoodinateInCircle(point: point)
 
         return point
@@ -150,7 +175,7 @@ class BaseApplicationManager: NSObject {
     ///   - dir: 方向
     ///   - point: 方向に応じた座標
     /// - Returns: 基の座標
-    func convertDirectionPointToBasisPoint(dir: Direction, point: CGPoint) -> CGPoint{
+    func convertFromDirectionPointToBasisPoint(dir: Direction, point: CGPoint) -> CGPoint{
         var p: CGPoint = point
         switch dir {
         case .front:
@@ -173,24 +198,30 @@ class BaseApplicationManager: NSObject {
     */
 
     /// ラベルの初期化
-    func initalizeShareAllLabel(to peerID: MCPeerID){
-        let labelDataArray = fieldLabels.flatMap{ $0.makeBaseAppLabel() }
+    
+    func initalizeShareAllLabel(){
+        print("initalizeShareAllLabel")
+//        let labelDataArray = fieldLabels.flatMap{ $0.makeBaseAppLabel(position: convertFromDirectionPointToBasisPoint(dir: direction!, point: $0.bounds.origin)) }
+        let labelDataArray = fieldLabels.flatMap{ $0.makeBaseAppLabel(position: $0.center) }
         let encoder = JSONEncoder()
-
         do {
             let encoded = try encoder.encode(labelDataArray)
+            print(encoded)
             let message = OperationMessage(operation: Operation.initalLabel.rawValue, data: encoded)
             if let data = message.encode() {
-                mcManager.send(data: data, peer: peerID)
+                mcManager.send(data: data)
             }
         } catch {
             fatalError()
         }
     }
+    
     /// ラベルの移動
     func shareMoveLabel(label: BaseAppLabel) {
         print("sharelabel")
-        if let labelData = label.makeEncodedBaseAppLabelData() {
+        
+        let position2 = convertFromDirectionPointToBasisPoint(dir: direction!, point: label.center)
+        if let labelData = label.makeEncodedBaseAppLabelData(position: position2) {
             let message = OperationMessage(operation: Operation.moveLabel.rawValue, data: labelData)
             if let data = message.encode() {
                 mcManager.send(data: data)
@@ -200,7 +231,8 @@ class BaseApplicationManager: NSObject {
 
     /// フリックによるラベルの移動
     func shareFlickedLabel(label: BaseAppLabel, start: CGPoint, end: CGPoint) {
-        if let flickedData = label.makeEncodedBaseAppLabelFlickedData() {
+        let end2 = convertFromDirectionPointToBasisPoint(dir: direction!, point: end)
+        if let flickedData = label.makeEncodedBaseAppLabelFlickedData(end: end2) {
             let message = OperationMessage(operation: Operation.flickedLabel.rawValue, data: flickedData)
             if let data = message.encode() {
                 mcManager.send(data: data)
@@ -208,6 +240,16 @@ class BaseApplicationManager: NSObject {
         }
     }
 
+    func shareCatchLabel(label: BaseAppLabel, position: CGPoint) {
+        let position2 = convertFromDirectionPointToBasisPoint(dir: direction!, point: position)
+        if let catchData = label.makeEncodedBaseAppLabelCatchData(position: position2) {
+            let message = OperationMessage(operation: Operation.catchLabel.rawValue, data: catchData)
+            if let data = message.encode() {
+                mcManager.send(data: data)
+            }
+        }
+    }
+    
     /// プレイヤーの移動
     func shareMovePlayer() {
         if let playerData = ownPlayer?.makeEncodedPlayerData() {
@@ -217,7 +259,6 @@ class BaseApplicationManager: NSObject {
             }
         }
     }
-
     /**
      message受けたときのパース
      */
@@ -234,6 +275,8 @@ class BaseApplicationManager: NSObject {
             receiveMoveLabelOperation(data: data)
         case .flickedLabel:
             receiveFlickedLabelOperation(data: data)
+        case .catchLabel:
+            receiveCatchLabelOperation(data: data)
         case .movePlayer:
             receiveMovePlayerOperation(data: data)
         }
@@ -241,19 +284,35 @@ class BaseApplicationManager: NSObject {
 
     /// ラベルの初期の共有
     private func receiveInitalLabelOperation(data: Data) {
+        print("receiveInitalLabelOperation")
         let decoder = JSONDecoder()
         guard let labelDataArray: [BaseAppLabelData] = try? decoder.decode([BaseAppLabelData].self, from: data) else { return }
+        fieldLabels.removeAll()
         labelDataArray.forEach {
+            let labelData = $0
+            let point = convertFromBasisPointToDirectionPoint(dir: direction!, from: labelData.position)
+            let rect = CGRect(origin: CGPoint(x: point.x - BaseAppLabel.labelSize.width/2, y: point.y - BaseAppLabel.labelSize.height/2), size:
+                BaseAppLabel.labelSize)
+            let showNumber = labelData.number
+            let id = labelData.id
+            let label = BaseAppLabel(frame: rect, number: showNumber, id: id, flick: flick!)
+            label.delegate = self
+            label.text = String(showNumber)
+            //仮
+            
+            fieldLabels.append(label)
             print($0)
         }
+        viewController?.addLabel()
     }
 
     /// ラベルの移動イベントを受け取った時の位置の更新
     private func receiveMoveLabelOperation(data: Data) {
+        print("reloadLocation")
         guard let baseAppLabelData: BaseAppLabelData = try? JSONDecoder().decode(BaseAppLabelData.self, from: data) else { return }
         let label = fieldLabels.filter{ $0.id == baseAppLabelData.id }.first
         if let label = label, let dir = direction {
-            label.midPoint = convertFromBasisPointToDirectionPoint(dir: dir, from: baseAppLabelData.position)
+            label.center = convertFromBasisPointToDirectionPoint(dir: dir, from: baseAppLabelData.position)
         }
     }
 
@@ -262,17 +321,35 @@ class BaseApplicationManager: NSObject {
         let label = fieldLabels.filter{ $0.id == baseAppLabelFlickedData.id }.first
         if let label = label, let dir = direction {
             let covertedEndPoint = convertFromBasisPointToDirectionPoint(dir: dir, from: baseAppLabelFlickedData.end)
-            label.moveLabelWithAnimation(start: label.midPoint, end: covertedEndPoint)
+//            label.moveLabelWithAnimation(start: label.midPoint, end: covertedEndPoint)
+            label.backgroundColor = UIColor.yellow
+            label.startPoint = label.center
+            label.endPoint = covertedEndPoint
+            label.labelPoint = label.center
+            label.superview?.bringSubview(toFront: label)
+            label.goAndReturn()
         }
     }
-
+    
+    private func receiveCatchLabelOperation(data: Data) {
+        guard let baseAppLabelCatchData: BaseAppLabelCatchData = try? JSONDecoder().decode(BaseAppLabelCatchData.self, from: data) else { return }
+        let label = fieldLabels.filter{ $0.id == baseAppLabelCatchData.id }.first
+        if let label = label, let dir = direction {
+            let covertedEndPoint = convertFromBasisPointToDirectionPoint(dir: dir, from: baseAppLabelCatchData.position)
+            label.caught = true
+            label.center = covertedEndPoint
+            label.backgroundColor = UIColor.green
+        }
+    }
+    
     private func receiveMovePlayerOperation(data: Data) {
         guard let playerData: PlayerData = try? JSONDecoder().decode(PlayerData.self, from: data) else { return }
         let player = players.filter{ $0.id == playerData.id }.first
+        let position = convertFromDirectionPointToBasisPoint(dir: direction!, point: playerData.position)
         if let player = player {
-            player.position = playerData.position
+            player.position = position
         } else {
-            let newPlayer = Player(id: playerData.id, name: playerData.name, position: playerData.position, type: .other)
+            let newPlayer = Player(id: playerData.id, name: playerData.name, position: position, type: .other)
             players.append(newPlayer)
         }
     }
@@ -281,6 +358,7 @@ class BaseApplicationManager: NSObject {
 extension BaseApplicationManager: BaseAppLabelDelegate {
     func appLabel(touchesBegan label: BaseAppLabel) {
         viewController?.scrollLock()
+        currentSelectedLabel = label
     }
 
     func appLabel(touchesMoved label: BaseAppLabel) {
@@ -288,14 +366,21 @@ extension BaseApplicationManager: BaseAppLabelDelegate {
     }
 
     func appLabel(touchesEnded label: BaseAppLabel) {
-        viewController?.scrollUnlock()
+//        viewController?.scrollUnlock()
         shareMoveLabel(label: label)
+        currentSelectedLabel = nil
     }
 
     func appLabel(flickMoved label: BaseAppLabel, start: CGPoint, end: CGPoint) {
         shareFlickedLabel(label: label, start: start, end: end)
+        currentSelectedLabel = nil
     }
+    func appLabel(caught label: BaseAppLabel, position: CGPoint){
+        shareCatchLabel(label: label, position: position)
+    }
+
 }
+
 
 extension BaseApplicationManager: MCManagerDelegate {
     func mcManager(manager: MCManager, session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
@@ -315,25 +400,10 @@ extension BaseApplicationManager: MCManagerDelegate {
 
 extension BaseApplicationManager: SocketManagerDelegate {
     func manager(manager: SocketManager, scrollBy move: (Int, Int)) {
+        if let currentSelectedLabel = currentSelectedLabel {
+            currentSelectedLabel.frame.origin.x += move.0.cgFloat/11.7
+            currentSelectedLabel.frame.origin.y += move.1.cgFloat/11.7
+        }
         self.delegate?.appManager(manager: self, scroll: move)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

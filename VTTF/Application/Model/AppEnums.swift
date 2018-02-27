@@ -22,7 +22,7 @@ enum ItemType {
 
 enum RoleInApp: String{
     case leader = "leader"
-    case member = "member"
+    case member = "members"
 }
 
 //extension RoleInApp: EnumEnumerable {}
