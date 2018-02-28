@@ -34,7 +34,7 @@ class BaseApplicationManager: NSObject {
     
     var startPotiton: StartPosition?
 
-    private var taskLabelCount: Int = 40
+    private var taskLabelCount: Int = 4
     
     var delegate: BaseAppManagerDelegate?
     
@@ -105,11 +105,11 @@ class BaseApplicationManager: NSObject {
         fieldLabels.removeAll()
         for i in 0..<taskLabelCount {
             let rect = CGRect(origin: genarateRandomPointInWorkspaceCircle(), size: BaseAppLabel.labelSize)
-            let showNumber = ( i / 4 + 1)
+            let imgName = "img0\(i+1)"
             let id = "baseapplabel:\(i)"
-            let label = BaseAppLabel(frame: rect, number: showNumber, id: id, flick: flick!)
+            let label = BaseAppLabel(frame: rect, imageName: imgName, id: id, flick: flick!)
             label.delegate = self
-            label.text = String(showNumber)
+
             //仮
             label.tag = i
             fieldLabels.append(label)
@@ -293,11 +293,10 @@ class BaseApplicationManager: NSObject {
             let point = convertFromBasisPointToDirectionPoint(dir: direction!, from: labelData.position)
             let rect = CGRect(origin: CGPoint(x: point.x - BaseAppLabel.labelSize.width/2, y: point.y - BaseAppLabel.labelSize.height/2), size:
                 BaseAppLabel.labelSize)
-            let showNumber = labelData.number
+            let imgName = labelData.imageName
             let id = labelData.id
-            let label = BaseAppLabel(frame: rect, number: showNumber, id: id, flick: flick!)
+            let label = BaseAppLabel(frame: rect, imageName: imgName, id: id, flick: flick!)
             label.delegate = self
-            label.text = String(showNumber)
             //仮
             
             fieldLabels.append(label)
@@ -322,7 +321,9 @@ class BaseApplicationManager: NSObject {
         if let label = label, let dir = direction {
             let covertedEndPoint = convertFromBasisPointToDirectionPoint(dir: dir, from: baseAppLabelFlickedData.end)
 //            label.moveLabelWithAnimation(start: label.midPoint, end: covertedEndPoint)
-            label.backgroundColor = UIColor.yellow
+            label.layer.borderColor = UIColor.yellow.cgColor
+            label.layer.borderWidth = 10
+
             label.startPoint = label.center
             label.endPoint = covertedEndPoint
             label.labelPoint = label.center
@@ -330,7 +331,7 @@ class BaseApplicationManager: NSObject {
             label.goAndReturn()
         }
     }
-    
+
     private func receiveCatchLabelOperation(data: Data) {
         guard let baseAppLabelCatchData: BaseAppLabelCatchData = try? JSONDecoder().decode(BaseAppLabelCatchData.self, from: data) else { return }
         let label = fieldLabels.filter{ $0.id == baseAppLabelCatchData.id }.first
@@ -338,7 +339,9 @@ class BaseApplicationManager: NSObject {
             let covertedEndPoint = convertFromBasisPointToDirectionPoint(dir: dir, from: baseAppLabelCatchData.position)
             label.caught = true
             label.center = covertedEndPoint
-            label.backgroundColor = UIColor.green
+            label.layer.borderColor = UIColor.white.cgColor
+            label.layer.borderWidth = 10
+
         }
     }
     

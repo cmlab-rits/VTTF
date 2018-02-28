@@ -18,32 +18,36 @@ protocol BaseAppLabelDelegate {
 
 
  //ラベルの仕様
-class BaseAppLabel: UILabel {
-    static let labelSize = CGSize(width: 200, height: 200)
-    var labelNumber: Int
+class BaseAppLabel: UIImageView {
+    static let imageWidth: CGFloat = 400
+    static let labelSize: CGSize = CGSize(400,400)
+    var imageName: String
     var id: String
+
     var delegate: BaseAppLabelDelegate?
     var startPoint: CGPoint?
     var labelPoint: CGPoint?
     var endPoint: CGPoint?
     var timer: Timer?
     var caught = true
-    init(frame: CGRect, number: Int, id: String, flick: Flick) {
-        labelNumber = number
+    init(frame: CGRect, imageName: String, id: String, flick: Flick) {
+        self.imageName = imageName
         self.id = id
-        super.init(frame: frame)
-        self.font = UIFont.systemFont(ofSize: UIFont.labelFontSize*4)
+
+        let backImage = UIImage(named: imageName)!
+        let labelSize = CGSize(width: BaseAppLabel.imageWidth, height: backImage.size.height*(BaseAppLabel.imageWidth/backImage.size.width))
+        let newFrame = CGRect(origin:frame.origin, size: labelSize)
+
+        super.init(frame: newFrame)
         self.isUserInteractionEnabled = true
-        self.backgroundColor = UIColor.green
-        self.minimumScaleFactor = 0.01
-        self.text = "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
-        self.textColor = UIColor.black
-        self.numberOfLines = 0
-        self.textAlignment = NSTextAlignment.center
+        self.contentMode = .scaleAspectFit
+        self.image = backImage
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 10
+
         if flick == .on {
             self.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(BaseAppLabel.longTouch(_:))))
         }
-//      self.addSubview(AppScrollView)
     }
     
     
@@ -53,23 +57,13 @@ class BaseAppLabel: UILabel {
     }
 
 
-//    override func draw(_ rect: CGRect) {
-//    }
-
-//
-//    func moveLabelWithAnimation(start: CGPoint, end: CGPoint) {
-//        UIView.animate(withDuration: TimeInterval(CGFloat(1.0)), animations: {() -> Void in
-//            // 移動先の座標を指定する.
-//            self.center = end
-//
-//        }, completion: {(Bool) -> Void in
-//        })
-//    }
 
     //フリック操作の詳細
     
     @objc func longTouch(_ sender:UILongPressGestureRecognizer?) {
-        self.backgroundColor = UIColor.yellow
+        self.layer.borderColor = UIColor.yellow.cgColor
+        self.layer.borderWidth = 10
+
         let point = sender?.location(in: self.superview)
         if sender?.state == .began {
             print("began")
@@ -151,17 +145,21 @@ class BaseAppLabel: UILabel {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.superview?.bringSubview(toFront: self)
         if caught == true {
-            self.backgroundColor = .red
+            self.layer.borderColor = UIColor.red.cgColor
+            self.layer.borderWidth = 10
             delegate?.appLabel(touchesBegan: self)
         } else {
             caught = true
-            self.backgroundColor = .green
+            self.layer.borderColor = UIColor.white.cgColor
+            self.layer.borderWidth = 10
             delegate?.appLabel(caught: self, position: self.center)
         }
     }
     // たかはし: ドラッグ時の移動量から差分をviewの位置へ反映
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.backgroundColor = .black
+        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderWidth = 10
+
         guard let touch = touches.first else { return }
 
         let before = touch.previousLocation(in: superview)
@@ -176,16 +174,17 @@ class BaseAppLabel: UILabel {
     }
     // たかはし:操作が終わったらスクロール操作の停止を解除する
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        backgroundColor = .green
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 10
         delegate?.appLabel(touchesEnded: self)
     }
 
     func makeBaseAppLabel(position: CGPoint) -> BaseAppLabelData {
-        return BaseAppLabelData(id: id, number: labelNumber, position: position)
+        return BaseAppLabelData(id: id, imageName: imageName, position: position)
     }
 
     func makeEncodedBaseAppLabelData(position: CGPoint) -> Data? {
-        let data = BaseAppLabelData(id: id, number: labelNumber, position: position)
+        let data = BaseAppLabelData(id: id, imageName: imageName, position: position)
         let encoder = JSONEncoder()
         do {
             let encoded: Data = try encoder.encode(data)
@@ -226,7 +225,7 @@ class BaseAppLabel: UILabel {
 
 struct BaseAppLabelData: Codable {
     let id: String
-    let number: Int
+    let imageName: String
     let position: CGPoint
 }
 
