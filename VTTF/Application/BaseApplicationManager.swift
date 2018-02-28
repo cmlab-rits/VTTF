@@ -328,7 +328,9 @@ class BaseApplicationManager: NSObject {
             label.endPoint = covertedEndPoint
             label.labelPoint = label.center
             label.superview?.bringSubview(toFront: label)
+            label.shrinkLabel(point: label.center)
             label.goAndReturn()
+
         }
     }
 
@@ -341,7 +343,7 @@ class BaseApplicationManager: NSObject {
             label.center = covertedEndPoint
             label.layer.borderColor = UIColor.white.cgColor
             label.layer.borderWidth = 10
-
+            label.restoreLabel(point: label.center)
         }
     }
     

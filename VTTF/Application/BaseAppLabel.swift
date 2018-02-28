@@ -20,10 +20,11 @@ protocol BaseAppLabelDelegate {
  //ラベルの仕様
 class BaseAppLabel: UIImageView {
     static let imageWidth: CGFloat = 400
+    static let shrinkWidth: CGFloat = 200
     static let labelSize: CGSize = CGSize(400,400)
     var imageName: String
     var id: String
-
+    var backImage: UIImage
     var delegate: BaseAppLabelDelegate?
     var startPoint: CGPoint?
     var labelPoint: CGPoint?
@@ -33,8 +34,7 @@ class BaseAppLabel: UIImageView {
     init(frame: CGRect, imageName: String, id: String, flick: Flick) {
         self.imageName = imageName
         self.id = id
-
-        let backImage = UIImage(named: imageName)!
+        self.backImage = UIImage(named: imageName)!
         let labelSize = CGSize(width: BaseAppLabel.imageWidth, height: backImage.size.height*(BaseAppLabel.imageWidth/backImage.size.width))
         let newFrame = CGRect(origin:frame.origin, size: labelSize)
 
@@ -57,18 +57,36 @@ class BaseAppLabel: UIImageView {
     }
 
 
+    func shrinkLabel(point: CGPoint) {
+        UIView.animate(withDuration: 0.3, animations: {
+            let labelSize = CGSize(width: BaseAppLabel.shrinkWidth, height: self.backImage.size.height*(BaseAppLabel.shrinkWidth/self.backImage.size.width))
+            let newPoint = CGPoint(x: point.x - labelSize.halfWidth, y: point.y - labelSize.halfHeight)
+            self.frame = CGRect(origin: newPoint, size: labelSize)
+        })
+    }
+
+    func restoreLabel(point: CGPoint) {
+        UIView.animate(withDuration: 0.3, animations: {
+            let labelSize = CGSize(width: BaseAppLabel.imageWidth, height: self.backImage.size.height*(BaseAppLabel.imageWidth/self.backImage.size.width))
+            let newPoint = CGPoint(x: point.x - labelSize.halfWidth, y: point.y - labelSize.halfHeight)
+            self.frame = CGRect(origin: newPoint, size: labelSize)
+        })
+
+    }
 
     //フリック操作の詳細
     
     @objc func longTouch(_ sender:UILongPressGestureRecognizer?) {
-        self.layer.borderColor = UIColor.yellow.cgColor
-        self.layer.borderWidth = 10
-
         let point = sender?.location(in: self.superview)
+
+
         if sender?.state == .began {
             print("began")
             startPoint = point
             labelPoint = self.center
+            self.layer.borderColor = UIColor.yellow.cgColor
+            self.layer.borderWidth = 10
+            shrinkLabel(point: point!)
         } else if sender?.state == .changed {
             print("changed")
         } else if sender?.state == .ended {
@@ -134,7 +152,8 @@ class BaseAppLabel: UIImageView {
                             self.center = CGPoint(x: self.labelPoint!.x, y: self.labelPoint!.y);
                             self.caught = true
             }, completion: {(Bool) -> Void in
-                self.backgroundColor = UIColor.green
+                self.layer.borderColor = UIColor.white.cgColor
+                self.restoreLabel(point: self.labelPoint!)
             })
         }
         
@@ -150,6 +169,7 @@ class BaseAppLabel: UIImageView {
             delegate?.appLabel(touchesBegan: self)
         } else {
             caught = true
+            restoreLabel(point: self.center)
             self.layer.borderColor = UIColor.white.cgColor
             self.layer.borderWidth = 10
             delegate?.appLabel(caught: self, position: self.center)
