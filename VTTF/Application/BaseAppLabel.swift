@@ -120,7 +120,7 @@ class BaseAppLabel: UIImageView {
             if let endPoint3 = endPoint2 {
                 endPoint = endPoint3
             } else {
-                endPoint = CGPoint(x: self.labelPoint!.x + dx * 3, y: self.labelPoint!.y + dy * 3)
+                endPoint = CGPoint(x: self.labelPoint!.x + dx * 5, y: self.labelPoint!.y + dy * 5)
             }
             self.delegate?.appLabel(flickMoved: self, start: startPoint!, end: endPoint!)
             goAndReturn()
