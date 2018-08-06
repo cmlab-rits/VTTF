@@ -105,7 +105,7 @@ class BaseApplicationManager: NSObject {
         fieldLabels.removeAll()
         for i in 0..<taskLabelCount {
             let rect = CGRect(origin: genarateRandomPointInWorkspaceCircle(), size: BaseAppLabel.labelSize)
-            let imgName = "img0\(i+1)"
+            let imgName = "img\(i+1)"
             let id = "baseapplabel:\(i)"
             let label = BaseAppLabel(frame: rect, imageName: imgName, id: id, flick: flick!)
             label.delegate = self
