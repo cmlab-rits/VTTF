@@ -34,7 +34,7 @@ class BaseApplicationManager: NSObject {
     
     var startPotiton: StartPosition?
 
-    private var taskLabelCount: Int = 4
+    private var taskLabelCount: Int = 18
     
     var delegate: BaseAppManagerDelegate?
     
