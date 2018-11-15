@@ -20,20 +20,38 @@ enum ItemType {
 }
 
 
-enum RoleInApp: String{
-    case leader = "leader"
-    case member = "members"
+enum RoleInApp: CaseIterable {
+    case leader
+    case member
+    var rawValue: String {
+        switch self {
+        case .leader:
+            return "leader"
+        case .member:
+            return "members"
+        }
+    }
 }
 
 //extension RoleInApp: EnumEnumerable {}
 
 
-enum Direction: String {
-    case front = "正面"
-    case back = "反対"
-    case left = "左"
-    case right = "右"
-//    case manual(CGFloat)
+enum Direction: CaseIterable {
+    case front
+    case back
+    case left
+    case right
+    var rawValue: String {
+        switch self {
+        case .front:
+            return "正面"
+        case .back:
+            return "反対"
+        case .left:
+            return "左"
+        case .right:
+            return "右"
+        }
+    }
 }
-extension Direction: EnumEnumerable {}
 

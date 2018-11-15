@@ -8,24 +8,49 @@
 
 import UIKit
 
-enum AppType: String {
-    case monitoring = "モニタリング"
-    case labelapp = "VTTF"
+enum AppType: CaseIterable {
+    case monitoring
+    case labelapp
+    var rawValue: String {
+        switch self {
+        case .monitoring:
+            return "モニタリング"
+        case .labelapp:
+            return "VTTF"
+        }
+    }
 }
 
-enum Flick: String {
-    case on = "あり"
-    case off = "なし"
-}
-enum StartPosition: String{
-    case left = "左"
-    case right = "右"
+enum Flick: CaseIterable {
+    case on
+    case off
+    var rawValue: String {
+        switch self {
+        case .on:
+            return "あり"
+        case .off:
+            return "なし"
+        }
+    }
 }
 
-extension AppType: EnumEnumerable {}
-extension RoleInApp: EnumEnumerable {}
-extension Flick: EnumEnumerable {}
-extension StartPosition: EnumEnumerable {}
+enum StartPosition: CaseIterable {
+    case left
+    case right
+    var rawValue: String {
+        switch self {
+        case .left:
+            return "左"
+        case .right:
+            return "右"
+        }
+    }
+}
+
+//extension AppType: EnumEnumerable {}
+//extension RoleInApp: EnumEnumerable {}
+//extension Flick: EnumEnumerable {}
+//extension StartPosition: EnumEnumerable {}
 
 class InitialApplicationSettingViewController: UIViewController {
 
@@ -60,8 +85,7 @@ class InitialApplicationSettingViewController: UIViewController {
             popoverController.sourceRect = CGRectMake(0, 0, self.view.bounds.width/2, self.view.bounds.height/2)
             popoverController.permittedArrowDirections = .any
         }
-
-        for item in RoleInApp.cases {
+        for item in RoleInApp.allCases {
             let action = UIAlertAction(title: item.rawValue, style: .default, handler: { _ in
                 self.role = item
                 self.tableView.reloadData()
@@ -81,7 +105,7 @@ class InitialApplicationSettingViewController: UIViewController {
             popoverController.permittedArrowDirections = .any
         }
 
-        for item in AppType.cases {
+        for item in AppType.allCases {
             let action = UIAlertAction(title: item.rawValue, style: .default, handler: { _ in
                 self.app = item
                 self.tableView.reloadData()
@@ -101,7 +125,7 @@ class InitialApplicationSettingViewController: UIViewController {
             popoverController.permittedArrowDirections = .any
         }
 
-        for item in Direction.cases {
+        for item in Direction.allCases {
             let action = UIAlertAction(title: item.rawValue, style: .default, handler: { _ in
                 self.direction = item
                 self.tableView.reloadData()
@@ -121,7 +145,7 @@ class InitialApplicationSettingViewController: UIViewController {
             popoverController.permittedArrowDirections = .any
         }
         
-        for item in Flick.cases {
+        for item in Flick.allCases {
             let action = UIAlertAction(title: item.rawValue, style: .default, handler: { _ in
                 self.flick = item
                 self.tableView.reloadData()
@@ -132,6 +156,7 @@ class InitialApplicationSettingViewController: UIViewController {
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
+
     func showAlertChoiceStartPosition() {
         let alert = UIAlertController(title: "初期位置", message: "", preferredStyle: .actionSheet)
         if let popoverController = alert.popoverPresentationController {
@@ -140,7 +165,7 @@ class InitialApplicationSettingViewController: UIViewController {
             popoverController.permittedArrowDirections = .any
         }
         
-        for item in StartPosition.cases {
+        for item in StartPosition.allCases {
             let action = UIAlertAction(title: item.rawValue, style: .default, handler: { _ in
                 self.startPotiton = item
                 self.tableView.reloadData()
