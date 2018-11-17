@@ -25,10 +25,8 @@ enum RoleInApp: CaseIterable {
     case member
     var rawValue: String {
         switch self {
-        case .leader:
-            return "leader"
-        case .member:
-            return "members"
+        case .leader:   return "leader"
+        case .member:   return "members"
         }
     }
 }
@@ -43,14 +41,10 @@ enum Direction: CaseIterable {
     case right
     var rawValue: String {
         switch self {
-        case .front:
-            return "正面"
-        case .back:
-            return "反対"
-        case .left:
-            return "左"
-        case .right:
-            return "右"
+        case .front:    return "正面"
+        case .back:     return "反対"
+        case .left:     return "左"
+        case .right:    return "右"
         }
     }
 }

@@ -104,7 +104,7 @@ class BaseAppLabel: UIImageView {
                 let x2 = playerData.position.x
                 let y2 = playerData.position.y
                 let radian2 = Float(atan2(x2-startPoint!.x, y2-startPoint!.y))
-                if radian2 >= radian - Float.pi/18 && radian2 <= radian + Float.pi/4.5 {
+                if radian2 >= radian - Float.pi/9 && radian2 <= radian + Float.pi/9 {
                     if let endPoint4 = endPoint2 {
                         let distance = (endPoint4.x - startPoint!.x)*(endPoint4.x - startPoint!.x) + (endPoint4.y - startPoint!.y)*(endPoint4.y - startPoint!.y)
                         let distance2 = (x2 - startPoint!.x)*(x2 - startPoint!.x) + (y2 - startPoint!.y)*(y2 - startPoint!.y)

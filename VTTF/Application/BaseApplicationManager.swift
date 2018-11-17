@@ -64,7 +64,7 @@ class BaseApplicationManager: NSObject {
     }
 
     func startApplication() {
-        guard let role = role, let direction = direction else { return }
+        guard let _ = role, let _ = direction else { return }
         mcManager.startManager()
         ownPlayer = Player(id: RandomUtil.generate16length(), name: UIDevice.current.name, position: CGPointZero, type: .own)
     
@@ -202,7 +202,7 @@ class BaseApplicationManager: NSObject {
     func initalizeShareAllLabel(){
         print("initalizeShareAllLabel")
 //        let labelDataArray = fieldLabels.flatMap{ $0.makeBaseAppLabel(position: convertFromDirectionPointToBasisPoint(dir: direction!, point: $0.bounds.origin)) }
-        let labelDataArray = fieldLabels.flatMap{ $0.makeBaseAppLabel(position: $0.center) }
+        let labelDataArray = fieldLabels.compactMap{ $0.makeBaseAppLabel(position: $0.center) }
         let encoder = JSONEncoder()
         do {
             let encoded = try encoder.encode(labelDataArray)

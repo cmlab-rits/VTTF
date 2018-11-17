@@ -30,8 +30,7 @@ class VttfLabel: UILabel {
         print("longtouch \(n)")
         n=n+1
         self.backgroundColor = UIColor.yellow
-        var point = sender?.location(in: vc?.view)
-        print(point)
+        let point = sender?.location(in: vc?.view)
         if sender?.state == .began {
             print("began")
             n = 0

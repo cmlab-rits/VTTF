@@ -13,10 +13,8 @@ enum AppType: CaseIterable {
     case labelapp
     var rawValue: String {
         switch self {
-        case .monitoring:
-            return "モニタリング"
-        case .labelapp:
-            return "VTTF"
+        case .monitoring:   return "モニタリング"
+        case .labelapp:     return "VTTF"
         }
     }
 }
@@ -26,10 +24,8 @@ enum Flick: CaseIterable {
     case off
     var rawValue: String {
         switch self {
-        case .on:
-            return "あり"
-        case .off:
-            return "なし"
+        case .on:   return "あり"
+        case .off:  return "なし"
         }
     }
 }
@@ -39,10 +35,8 @@ enum StartPosition: CaseIterable {
     case right
     var rawValue: String {
         switch self {
-        case .left:
-            return "左"
-        case .right:
-            return "右"
+        case .left:     return "左"
+        case .right:    return "右"
         }
     }
 }
